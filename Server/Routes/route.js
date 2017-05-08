@@ -6,15 +6,15 @@ const passport = require('passport');
 const googlePassport = require('./../Passport/google.auth');
 const session = require('express-session');
 const cors = require('cors');
+const postController = require('./../API/posts/posts.controller');
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        //res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         next();
     }
-    //app.use(allowCrossDomain);
-    //app.use(cors())
+    app.use(allowCrossDomain);
     app.use(session({ secret: 'fawfef534634sdfsfsdf' }));
     app.use(passport.initialize());
     app.use(passport.session());
@@ -24,7 +24,6 @@ module.exports= (app)=>{
 
 
     app.get('/login/google',allowCrossDomain,
-        (req,res,next)=>{console.log('---in passport ',req.url);next()},
         passport.authenticate('google',{scope:['profile','email']})
     );
     app.get('/auth/google',allowCrossDomain,
@@ -32,6 +31,7 @@ module.exports= (app)=>{
             successRedirect : 'http://anuragsharma.com:9000/dashboard',
             failureRedirect : '/login'
         }));
+    app.post('/api/posts',postController.createPost);
 
 
 }

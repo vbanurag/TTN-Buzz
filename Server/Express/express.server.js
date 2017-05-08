@@ -16,6 +16,3 @@ Route(app);
 app.listen(4500,()=>{
     console.log('server is running at anuragsharma.com:4500')
 })
-app.use('/*',(req,res) => {
-    res.redirect('http://localhost:9000/');
-})
