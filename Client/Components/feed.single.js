@@ -8,29 +8,30 @@ class Feeds extends Component {
         super(props);
     }
     render(){
+        const item = this.props.data;
         return(
             <div className="post">
                 <div className="postheader">
                     <img src='' alt="User Image" />
                     <div className="user">
                         <span className="Username">
-                            Anurag Sharma
+                            {item.user.name}
                         </span>
                         <div className="userDetails">
-                            <span className="email">abc@gmail.com</span>
+                            <span className="email">{item.createdAt}</span>
                         </div>
                     </div>
                     <div className="status">
-                        Lost n Found
+                        {item.category}
                     </div>
                 </div>
                 <div className="postcontainer">
                     <div className="postimage">
-                        <img src='' alt="post image" />
+                        <img src={item.imageUrl} alt="post image" />
                     </div>
                     <div className="postthoughts">
                         <p>
-
+                            {item.content}
                         </p>
                     </div>
                 </div>

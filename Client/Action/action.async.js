@@ -23,6 +23,7 @@ export function fetchUser() {
             })
     }
 }
+
 export const createPost = (data) => {
     console.log(data,'----------dispatch method')
     return(dispatch) => {
@@ -45,3 +46,19 @@ export const createPost = (data) => {
             })
     }
 }
+export const fetchPost = () => {
+    return(dispatch) => {
+        dispatch(POST_CREATE_INIT());
+        fetch('http://localhost:4500/api/posts',{
+            credentials: 'include',
+        })
+            .then(response => response.json())
+            .then(posts => {
+                dispatch( POST_CREATED_ONSUCCESS(posts))
+            })
+            .catch( (err) => {
+                dispatch(POST_CREATE_ONERROR(err))
+            })
+    }
+}
+

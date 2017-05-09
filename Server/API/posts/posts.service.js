@@ -18,5 +18,13 @@ exports.createPost=(post,res)=>{
             })
         }
     })
-
+}
+exports.getPosts = (res) => {
+    Post.find((err,allPost) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(allPost);
+        }
+    })
 }

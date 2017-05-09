@@ -20,5 +20,9 @@ module.exports = (app) => {
         checkLoginMiddleware.isLoggedIn,
         postController.createPost
     )
+    app.get('/api/posts',
+        checkLoginMiddleware.isLoggedIn,
+        postController.getPosts
+    )
 
 }

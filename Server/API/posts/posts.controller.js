@@ -21,5 +21,7 @@ exports.createPost =(req,res,next)=>{
         console.log('url is ',url,'------',req.body.status)
         postService.createPost(buzzData,res);
     });
-
+}
+exports.getPosts = (req,res,next) => {
+    postService.getPosts(res);
 }
