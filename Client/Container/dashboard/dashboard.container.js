@@ -6,12 +6,10 @@ import Header from  './../../Components/navigation.dashboard';
 import Buzz from './../../Components/CreateBuzz.dashboard';
 import ProfileCard from './../../Components/profileCard.dashboard';
 import SidebarMenu from './../../Components/sidebar.menu.dashboard';
+import FeedContainer from './../../Components/statusfeed';
 import './dashboard.css';
 import './dashboard-2.css';
 import './dashboard-3.css';
-import {
-    fetchUser
-}from './../../Action/'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -19,6 +17,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        console.log('dashboard user----', this.props.props.props)
         return(
             <div>
                 <div className="container-fluid display-table">
@@ -30,7 +29,8 @@ class Dashboard extends Component {
                             <SidebarMenu props = {this.props.props} />
                         </div>
                         <Header props = {this.props.props} />
-                        <Buzz props = {this.props.props} />
+                        <Buzz props = {this.props.props}  />
+                        <FeedContainer props={this.props.props.props}/>
                     </div>
                 </div>
             </div>

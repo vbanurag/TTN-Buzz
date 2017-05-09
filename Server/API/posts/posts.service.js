@@ -4,5 +4,19 @@
 const Post = require('./posts.model.js');
 
 exports.createPost=(post,res)=>{
+    console.log(post,'----data of post')
+    Post.create(post,(err,data)=> {
+        if(err){
+            res.send(err)
+        }else{
+            Post.find((err,allPost) => {
+                if(err){
+                    res.send(err)
+                }else{
+                    res.send(allPost);
+                }
+            })
+        }
+    })
 
 }

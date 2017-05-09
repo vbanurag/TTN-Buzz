@@ -11,12 +11,10 @@ import {
     middleware
 } from './../Middleware';
 
-import {
-    userReducer
-} from './../Reducer';
+import allReducer from './../combineReducer/combine.reducer';
 
 const middlewareCall = applyMiddleware(...middleware);
 
-const store = createStore(userReducer, middlewareCall);
+const store = createStore(allReducer, middlewareCall);
 
 export default store;

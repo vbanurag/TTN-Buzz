@@ -8,7 +8,7 @@ class  ProfileCard extends Component {
         super(props)
     }
     render() {
-        const user = this.props.props.props.users;
+        const user = this.props.props.props.userReducer.users;
         return(
             <div className="container">
                 <div className="row">
@@ -17,7 +17,7 @@ class  ProfileCard extends Component {
                             <div className="cardheader">
                             </div>
                             <div className="avatar">
-                                <img alt="" src={user.imagUrl}></img>
+                                <img alt="" src={ user.imagUrl }/>
                             </div>
                             <div className="info">
                                 <div className="title">
@@ -32,13 +32,6 @@ class  ProfileCard extends Component {
                                 <a className="btn btn-danger btn-sm" rel="publisher"
                                    href="https://plus.google.com/+ahmshahnuralam">
                                     <i className="fa fa-google-plus"></i>
-                                </a>
-                                <a className="btn btn-primary btn-sm" rel="publisher"
-                                   href="https://plus.google.com/shahnuralam">
-                                    <i className="fa fa-facebook"></i>
-                                </a>
-                                <a className="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-                                    <i className="fa fa-behance"></i>
                                 </a>
                             </div>
                         </div>

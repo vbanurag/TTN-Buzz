@@ -8,7 +8,7 @@ class Navigation extends Component {
         super(props)
     }
     render() {
-        const user = this.props.props.props.users;
+        const user = this.props.props.props.userReducer.users;
         return(
             <div className="col-md-5 aboveHeader">
                 <header>
@@ -19,7 +19,7 @@ class Navigation extends Component {
                                     <a href="#" className="dropdown-toggle"
                                        data-toggle="dropdown">
                                         <img src= {user.imagUrl}
-                                             alt="user" height='32px' width='22px'/>
+                                             alt="user" height='36px' width='36px'/>
                                         <b className="caret"></b></a>
                                     <ul className="dropdown-menu">
                                         <li>

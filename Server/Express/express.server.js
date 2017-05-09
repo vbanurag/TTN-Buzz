@@ -10,9 +10,9 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-
-
 const Route = require('./../Routes/route');
+
+
 Route(app);
 
 app.listen(4500,()=>{

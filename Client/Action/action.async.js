@@ -28,6 +28,7 @@ export const createPost = (data) => {
     return(dispatch) => {
         dispatch(POST_CREATE_INIT());
         fetch('http://localhost:4500/api/posts',{
+            credentials: 'include',
             method: 'post',
             headers: {
                 'Accept': 'application/json',

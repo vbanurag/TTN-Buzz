@@ -39,11 +39,13 @@ class Buzz extends Component {
     onClickHandler(e){
         e.preventDefault();
         const dispatch = this.props.props;
+        //this.props.createBuzz(this.state);
         dispatch.props.dispatch(createPost(this.state));
     }
 
     render() {
         const { data } = this.state;
+        console.log(this.props, '-------buzz created')
         return(
             <div className="container-buzz">
                 <div className="row">

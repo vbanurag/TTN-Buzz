@@ -17,6 +17,7 @@ import {
     fetchUser
 } from './../Action/';
 
+
 class StartContainer extends Component {
     constructor(props){
         super(props);
@@ -26,7 +27,7 @@ class StartContainer extends Component {
     }
 
     render() {
-        console.log('this props---final',this.props.props.users)
+        console.log('this props---final',this.props.props.userReducer)
         return(
                 <div>
                     <Route exact path='/'
@@ -34,7 +35,7 @@ class StartContainer extends Component {
                                (<Login { ...props }
                                        props = { this.props }/>)}/>
 
-                    {this.props.props.users.length!=0?
+                    {this.props.props.userReducer.users !=0?
                         <Route exact path='/dashboard'
                                render={ props => (
                                    <Dashboard { ...props}

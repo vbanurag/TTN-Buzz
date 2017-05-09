@@ -6,8 +6,9 @@ const passport = require('passport');
 const googlePassport = require('./../Passport/google.auth');
 const session = require('express-session');
 const cors = require('cors');
-const postController = require('./../API/posts/posts.controller');
 const checkLoginMiddleware = require('./../MIddlewares/logged.check');
+const PostsRoute = require('./../API/posts/post.route');
+
 
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
@@ -48,7 +49,8 @@ module.exports= (app)=>{
             failureRedirect : 'http://anuragsharma.com:9000/'
         }));
 
-    app.post('/api/posts',checkLoginMiddleware.isLoggedIn,postController.createPost);
+    PostsRoute(app);
+    //app.post('/api/posts',checkLoginMiddleware.isLoggedIn,postController.createPost);
 
     app.get('/api/user' ,
         checkLoginMiddleware.isLoggedIn,
