@@ -8,6 +8,7 @@ class  ProfileCard extends Component {
         super(props)
     }
     render() {
+        const user = this.props.props.props.users;
         return(
             <div className="container">
                 <div className="row">
@@ -16,11 +17,11 @@ class  ProfileCard extends Component {
                             <div className="cardheader">
                             </div>
                             <div className="avatar">
-                                <img alt="" src="http://lorempixel.com/100/100/people/9/"></img>
+                                <img alt="" src={user.imagUrl}></img>
                             </div>
                             <div className="info">
                                 <div className="title">
-                                    <a target="_blank" href="http://scripteden.com/">XVZ sdsf</a>
+                                    <a target="_blank" href="">{user.displayName}</a>
                                 </div>
                                 <div className="desc">Passionate designer</div>
                             </div>

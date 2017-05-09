@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import App from './../Client/Container/app';
 import store from './../Client/Store/app.store';
 import {
@@ -12,9 +11,7 @@ import {
 
 render(
     <Provider store = { store } >
-        <BrowserRouter>
             <App/>
-        </BrowserRouter>
     </Provider>,
     document.getElementById('app')
 );

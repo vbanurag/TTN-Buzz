@@ -1,8 +1,8 @@
-/*import {
+import {
     FETCH_USER_ERROR,
     FETCH_USER_STARTED,
     FETCH_USER_SUCCESS
-} from '../config/config.constant';*/
+} from './../Config/config.constants'
 
 
 const intialState = {
@@ -22,7 +22,8 @@ export const userReducer = (state = intialState, action) => {
             }
         case 'FETCH_USER_SUCCESS':
             {
-                let user = state.users.concat(action.users);
+                let user = action.users;
+                console.log(user,'response user')
                 return {
                     ...state,
                     users: user,

@@ -8,6 +8,7 @@ class Navigation extends Component {
         super(props)
     }
     render() {
+        const user = this.props.props.props.users;
         return(
             <div className="col-md-5 aboveHeader">
                 <header>
@@ -15,18 +16,22 @@ class Navigation extends Component {
                         <div className="header-rightside">
                             <ul className="list-inline header-top pull-right">
                                 <li className="dropdown">
-                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown"><img src="http://lorempixel.com/100/100/people/9/" alt="user" height='32px' width='22px'/>
+                                    <a href="#" className="dropdown-toggle"
+                                       data-toggle="dropdown">
+                                        <img src= {user.imagUrl}
+                                             alt="user" height='32px' width='22px'/>
                                         <b className="caret"></b></a>
                                     <ul className="dropdown-menu">
                                         <li>
                                             <div className="navbar-content">
-                                                <span>JS Krishna</span>
+                                                <span>{ user.displayName }</span>
                                                 <p className="text-muted small">
-                                                    me@jskrishna.com
+                                                    { user.email }
                                                 </p>
                                                 <div className="divider">
                                                 </div>
-                                                <a href="#" className="view btn-sm active">View Profile</a>
+                                                <a href="http://localhost:4500/user/logout"
+                                                   className="view btn-sm active">Logout</a>
                                             </div>
                                         </li>
                                     </ul>

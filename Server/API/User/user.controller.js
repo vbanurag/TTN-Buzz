@@ -8,24 +8,6 @@ exports.createUser =(req,res,next)=>{
     console.log('user data ',userData);
     userService.createUser(userData,res);
 }
-/*exports.getUser = (req,res,next)=>{
-        console.log(req.query.name);
-        userService.findUser(req.query.name,res);
+exports.getUser = (req,res,next) => {
+    userService.sendUser(req.user,res);
 }
-
-exports.updateUser=(req,res,next)=>{
-    console.log('id: ',req.query.id,' data is : ',req.body.data);
-    userService.updateUser(req.query.id,req.body.data,res);
-
-}
-exports.deleteUser = (req,res,next)=>{
-    //console.log('id: ',req.params,' data is : ',req.body.data);
-    userService.deleteUser(req.params.id,res);
-}
-exports.findAllUser=(req,res,next)=> {
-    userService.findAllUser(res);
-}
-exports.findByQuery=(req,res,next)=>{
-    console.log('params name : ',req.params.name)
-    userService.findByQuery(req.params.name,res);
-}*/

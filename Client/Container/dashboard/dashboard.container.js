@@ -9,6 +9,9 @@ import SidebarMenu from './../../Components/sidebar.menu.dashboard';
 import './dashboard.css';
 import './dashboard-2.css';
 import './dashboard-3.css';
+import {
+    fetchUser
+}from './../../Action/'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -16,7 +19,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log('------',this.props)
         return(
             <div>
                 <div className="container-fluid display-table">

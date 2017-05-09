@@ -11,13 +11,8 @@ import fetch from 'isomorphic-fetch';
 export function fetchUser() {
     return (dispatch) => {
         dispatch(FETCH_USER_START());
-        fetch('http://anuragsharma.com:4500/login/google',{
-            method: 'GET',
-            mode: 'cors',
-            headers:{
-                'Access-Control-Allow-Origin':'*'
-            },
-
+        fetch('http://localhost:4500/api/user',{
+            credentials: 'include',
         })
             .then(response => response.json())
             .then(users => {
@@ -32,13 +27,13 @@ export const createPost = (data) => {
     console.log(data,'----------dispatch method')
     return(dispatch) => {
         dispatch(POST_CREATE_INIT());
-        fetch('http://anuragsharma.com:4500/api/posts',{
+        fetch('http://localhost:4500/api/posts',{
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: data
+            body:JSON.stringify({image:data.imagePreviewUrl,status:data.data.status})
         })
             .then( response => response.json() )
             .then( posts => {

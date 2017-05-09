@@ -5,15 +5,21 @@ import React, { Component } from 'react';
 import {
     connect
 } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import Container from './Start.container';
+
 
 class App extends Component {
     constructor(props){
         super(props);
     }
+
+
     render() {
         return(
-            <Container props={this.props}/>
+            <BrowserRouter>
+                <Container props={this.props}/>
+            </BrowserRouter>
         )
     }
 }
