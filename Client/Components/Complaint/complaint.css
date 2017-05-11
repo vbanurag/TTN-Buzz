@@ -1,0 +1,24 @@
+.red{
+    color:red;
+}
+.form-area
+{
+    background-color: #FAFAFA;
+    padding: 10px 40px 60px;
+}
+.brTag{
+    clear:both
+}
+.title{
+    margin-bottom: 25px;
+    text-align: center;
+}
+.form-container{
+    max-width: 50%;
+    margin-left: 21%;
+    margin-top: 9%;
+}
+.button.btn-danger.pull-right{
+    border: darkcyan;
+    border-radius: 4em;
+}

@@ -56,6 +56,13 @@ class StartContainer extends Component {
                                               props = { this.props }/>)} />
                         :<Link to="/" />
                     }
+                    {this.props.props.userReducer.users !=0?
+                        <Route exact path='/dashboard/complaint'
+                               render={ props => (
+                                   <Dashboard { ...props}
+                                              props = { this.props }/>)} />
+                        :<Link to="/" />
+                    }
 
                 </div>
         )

@@ -7,6 +7,7 @@ import Buzz from './../../Components/CreateBuzz.dashboard';
 import ProfileCard from './../../Components/profileCard.dashboard';
 import SidebarMenu from './../../Components/sidebar.menu.dashboard';
 import FeedContainer from './../../Components/statusfeed';
+import ComplaintContainer from './../../Components/Complaint/complaint.dashboard'
 import './dashboard.css';
 import './dashboard-2.css';
 import './dashboard-3.css';
@@ -36,20 +37,27 @@ class Dashboard extends Component {
                         <Header props = {this.props.props} />
                         {
                             this.props.location.pathname == '/dashboard'?
-                                <Buzz props = {this.props.props}   />
+                                <div>
+                                    <Buzz props = {this.props.props}   />
+                                    <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
+                                </div>
                                 : <span></span>
                         }
                         {
                             this.props.location.pathname == '/dashboard/LostAndFound'?
-                                <span className="emptyLost"/>
+                                <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
                                 : <span></span>
                         }
                         {
                             this.props.location.pathname == '/dashboard/buzz'?
-                                <span className="emptyLost"/>
+                                <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
                                 : <span></span>
                         }
-                        <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
+                        {
+                            this.props.location.pathname == '/dashboard/complaint'?
+                                <ComplaintContainer />
+                                : <span></span>
+                        }
                     </div>
                 </div>
             </div>

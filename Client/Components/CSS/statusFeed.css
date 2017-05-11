@@ -160,11 +160,21 @@ textarea::-webkit-input-placeholder {
     width: 100%;
 }
 
-.likediscom a {
+.likediscom div {
     margin-right: 15px;
     text-decoration: none;
     color: blue;
     cursor: pointer;
+    display: inline-flex;
+}
+.like {
+    width:3%;
+}
+.dislike {
+    width:3%;
+}
+.comment{
+    width:25%;
 }
 
 .postcomment {

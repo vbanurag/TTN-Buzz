@@ -21,7 +21,7 @@ class SideBarNavigation extends Component {
                         </i><span className="hidden-xs hidden-sm">
                         Home
                     </span></Link></li>
-                    <li><Link to="dashboard/buzz">
+                    <li><Link to="/dashboard/buzz">
                         <i className="fa fa-tasks" aria-hidden="true">
                         </i><span className="hidden-xs hidden-sm">
                         Buzz
@@ -30,6 +30,11 @@ class SideBarNavigation extends Component {
                         <i className="fa fa-bar-chart" aria-hidden="true">
                         </i><span className="hidden-xs hidden-sm">
                         Lost and Found
+                    </span></Link></li>
+                    <li><Link to="/dashboard/complaint">
+                        <i className="fa fa-exclamation-triangle" aria-hidden="true">
+                        </i><span className="hidden-xs hidden-sm">
+                        Complaint
                     </span></Link></li>
                     <li><a href="#"><i className="fa fa-cog" aria-hidden="true"></i><span className="hidden-xs hidden-sm">Setting</span></a></li>
                 </ul>
