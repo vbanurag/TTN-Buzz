@@ -17,12 +17,24 @@ class StatusFeed extends Component {
     }
     render () {
         const AllPost = this.props.props.postReducer;
-        console.log(AllPost,'in status feed-------')
+
         return(
-            <div>
+            <div className="post-Container">
                 {AllPost.posts!=null?
                     AllPost.posts.map((item)=> {
-                        return <li><Feed data={ item }/></li>
+                        if(this.props.location=='/dashboard/LostAndFound'){
+                            if(item.category=='Lost & Found'){
+                                return <li><Feed data={ item }/></li>
+                            }
+                        }
+                        else if(this.props.location=='/dashboard/buzz'){
+                            if(item.category=='BUZZ'){
+                                return <li><Feed data={ item }/></li>
+                            }
+                        }
+                        else{
+                            return <li><Feed data={ item }/></li>
+                        }
                     })
                     :<span>fail</span>
                 }
