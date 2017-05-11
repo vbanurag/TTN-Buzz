@@ -14,7 +14,8 @@ class Buzz extends Component {
                 status:'',
                 image: '',
                 video: '',
-                imageFile:''
+                imageFile:'',
+                category:''
             },
             file:'',
             imagePreviewUrl:''
@@ -23,6 +24,7 @@ class Buzz extends Component {
     onChangeHandler(e){
         const { data } = this.state;
         data[e.target.name] = e.target.value;
+        console.log('----stattus ....',data)
 
         let reader = new FileReader();
         let file = e.target.files[0];
@@ -76,6 +78,15 @@ class Buzz extends Component {
                                                    accept="image/*"/>
                                             <i className="fa fa-picture-o">
                                             </i></li>
+                                        <li>
+                                            <select className="form-control"
+                                                    onChange={this.onChangeHandler.bind(this)}
+                                                    name="category"
+                                            >
+                                                <option value='Buzz'>Buzz</option>
+                                                <option value='Lost & Found'>Lost & Found</option>
+                                            </select>
+                                        </li>
                                     </ul>
                                     <button
                                         className="statusButton btn btn-success green"

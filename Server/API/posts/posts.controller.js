@@ -7,16 +7,13 @@ const uploadImage = require('./../../uploader/cdn.image.upload');
 
 exports.createPost =(req,res,next)=>{
     let url =''
-    console.log('user------',req.user)
+    console.log('user------',req.body)
     uploadImage.uploadImage(req.body.image, (url) => {
         let buzzData = {
-            user: {
-                id:req.user._id,
-                name:req.user.displayName,
-                imageUrl: req.user.imagUrl
-            },
+            postedBy: req.user._id,
             imageUrl:url,
-            content: req.body.status
+            content: req.body.status,
+            category: req.body.category
         }
         console.log('url is ',url,'------',req.body.status)
         postService.createPost(buzzData,res);

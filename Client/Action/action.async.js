@@ -35,7 +35,11 @@ export const createPost = (data) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body:JSON.stringify({image:data.imagePreviewUrl,status:data.data.status})
+            body:JSON.stringify({
+                image:data.imagePreviewUrl,
+                status:data.data.status,
+                category: data.data.category
+            })
         })
             .then( response => response.json() )
             .then( posts => {

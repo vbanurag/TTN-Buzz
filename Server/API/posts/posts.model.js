@@ -8,11 +8,7 @@ const PostSchema = new Mongoose.Schema({
         type : String,
         default : 'BUZZ'
     },
-    user : {
-        id : String,
-        name : String,
-        imageUrl : String
-    },
+    postedBy: { type:Mongoose.Schema.Types.ObjectId,ref:'User' },
     imageUrl : String,
     videoUrl : String,
     content : String,

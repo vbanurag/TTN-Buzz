@@ -20,11 +20,11 @@ exports.createPost=(post,res)=>{
     })
 }
 exports.getPosts = (res) => {
-    Post.find((err,allPost) => {
-        if(err){
-            res.send(err);
-        }else{
-            res.send(allPost);
-        }
-    })
+   Post.find({}).sort({createdAt: -1}).populate('postedBy').exec((err,allPost)=> {
+       if(err){
+           res.send(err);
+       }else{
+           res.send(allPost);
+       }
+   })
 }
