@@ -45,8 +45,18 @@ class Buzz extends Component {
         e.preventDefault();
         const dispatch = this.props.props;
         const { data } = this.state;
-        if(data.status || data.imageFile ){
-            dispatch.props.dispatch(createPost(this.state));
+        if((data.status || data.imageFile )){
+            if(data.category!=''){
+                dispatch.props.dispatch(createPost(this.state));
+                this.setState({
+                    data:{}
+                })
+                console.log('push called')
+                window.location.reload();
+            }
+            else{
+                this.setState({isInvalid:true})
+            }
         }else{
             this.setState({isInvalid:true})
         }
@@ -65,7 +75,7 @@ class Buzz extends Component {
                                     <textarea className="buzzShare"
                                               placeholder="Create your Buzz"
                                               name="status"
-                                              value= {data.status}
+                                              value= {this.state.data.status}
                                               onChange={ this.onChangeHandler.bind(this) }
                                     ></textarea>
                                     <ul>

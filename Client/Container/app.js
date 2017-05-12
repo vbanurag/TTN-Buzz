@@ -7,6 +7,9 @@ import {
 } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Container from './Start.container';
+import {
+    browserHistory
+} from 'react-router';
 
 
 class App extends Component {
@@ -17,7 +20,7 @@ class App extends Component {
 
     render() {
         return(
-            <BrowserRouter>
+            <BrowserRouter history={browserHistory}>
                 <Container props={this.props}/>
             </BrowserRouter>
         )

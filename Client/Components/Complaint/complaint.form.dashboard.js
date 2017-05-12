@@ -7,6 +7,15 @@ import './complaint.css';
 class ComplaintForm extends Component {
     constructor(props) {
         super(props)
+        this.state={
+            complaint: {
+                title:'',
+
+            }
+        }
+    }
+    onChangeHandler(e) {
+
     }
     render() {
         return(
@@ -16,10 +25,14 @@ class ComplaintForm extends Component {
                         <br className="brTag" ></br>
                         <h3 className="title" >Complaint Form</h3>
                         <div className="form-group">
-                            <input type="text" className="form-control" id="name" name="name" placeholder="Title" required/>
+                            <input type="text" className="form-control" id="name" name="title" placeholder="Title" required/>
                         </div>
                         <div className="form-group">
-                            <textarea className="form-control" type="textarea"  placeholder="Description"></textarea>
+                            <textarea className="form-control"
+                                      type="textarea"
+                                      placeholder="Description"
+                                      name="Description"
+                            ></textarea>
                         </div>
                         <div className="form-group">
                             <select className="selectpicker" >

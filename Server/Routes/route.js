@@ -59,8 +59,12 @@ module.exports= (app)=>{
     app.get('/user/logout',(req,res) => {
         if(req.isAuthenticated()){
             console.log('logged in user')
-            req.logout();
-            res.redirect('http://anuragsharma.com:9000/');
+            //req.logOut();
+            //res.redirect('http://anuragsharma.com:9000/');
+            req.session.destroy(function(e){
+                req.logout();
+                res.redirect('http://anuragsharma.com:9000/');
+            });
         }else{
             res.redirect('http://anuragsharma.com:9000/');
         }

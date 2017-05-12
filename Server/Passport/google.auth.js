@@ -7,6 +7,7 @@ const passport = require('passport');
 const UserController = require('./../../Server/API/User/user.controller');
 const User = require('./../API/User/user.model');
 const mongoose = require('mongoose');
+const createUser = require('./../API/User/user.controller');
 const collections = mongoose.connections[0].collections;
 
 module.exports.googlePassport = ()=>{
@@ -18,42 +19,7 @@ module.exports.googlePassport = ()=>{
             callbackURL: configGoogle.google.callbackURL
         },
         (token,refreshToken,profile,done)=> {
-
-            if(profile._json.domain === 'tothenew.com'){
-                let user = {
-                    displayName: profile.displayName,
-                    email: profile.emails[0].value,
-                    imagUrl: profile.photos[0].value,
-                }
-                User.find({}).exec( (err,collection) => {
-                    if(collection.length==0){
-                        User.create(user)
-                        return done(null,profile);
-                    }else{
-
-                        User.findOne({'email': profile.emails[0].value}, (err,data) => {
-                            if(err){
-                                return done(err);
-                            }else{
-                                if(data){
-                                    return done(null,data);
-                                }else{
-                                    User.create(user,(err, data) => {
-                                        console.log(data)
-                                    })
-                                    User.findOne({'email':user.email},(err, data) => {
-                                        return done(null,data);
-                                    })
-                                }
-
-                            }
-                        })
-                    }
-                })
-            }else{
-                return done(null,null);
-            }
-
+            createUser.createUser(profile,done);
         }
     ))
     passport.serializeUser(function(user, done) {
@@ -62,6 +28,7 @@ module.exports.googlePassport = ()=>{
     });
 
     passport.deserializeUser(function(id, done) {
+        console.log('deserialize----',id)
         User.findOne({_id:id},(err,data)=> {
             if(err){
                 done(err)

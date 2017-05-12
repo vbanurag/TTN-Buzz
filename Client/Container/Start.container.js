@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import Login from './login/login.component';
+import Error from './error'
 import {
     BrowserRouter as Router ,
     Link
@@ -18,6 +19,7 @@ import {
 } from './../Action/';
 
 
+
 class StartContainer extends Component {
     constructor(props){
         super(props);
@@ -27,7 +29,7 @@ class StartContainer extends Component {
     }
 
     render() {
-        console.log('this props---final',this.props.props.userReducer)
+        console.log(this.props,'this props---final', Array.isArray(this.props.props.userReducer.users)  )
         return(
                 <div>
                     <Route exact path='/'
@@ -35,42 +37,41 @@ class StartContainer extends Component {
                                (<Login { ...props }
                                        props = { this.props }/>)}/>
 
-                    {this.props.props.userReducer.users !=0?
+                    { !Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard'
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<Link to="/" />
+                        :<a href="http://localhost:4500/"></a>
                     }
-                    {this.props.props.userReducer.users !=0?
+                    {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/LostAndFound'
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<Link to="/" />
+                        :<Link to='/'/>
                     }
-                    {this.props.props.userReducer.users !=0?
+                    {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/buzz'
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<Link to="/" />
+                        :<Link to='/'/>
                     }
-                    {this.props.props.userReducer.users !=0?
+                    {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/complaint'
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<Link to="/" />
+                        :<Link to='/'/>
                     }
-                    {this.props.props.userReducer.users !=0?
+                    {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/viewComplaint'
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<Link to="/" />
+                        :<Link to='/'/>
                     }
-
                 </div>
         )
     }

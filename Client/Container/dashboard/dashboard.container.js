@@ -34,7 +34,7 @@ class Dashboard extends Component {
                         {
                             this.props.location.pathname == '/dashboard'?
                                 <div>
-                                    <Buzz props = {this.props.props}   />
+                                    <Buzz props = {this.props.props} route={this.props}  />
                                     <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
                                 </div>
                                 : <span></span>
