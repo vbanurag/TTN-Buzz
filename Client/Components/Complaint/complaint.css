@@ -22,3 +22,12 @@
     border: darkcyan;
     border-radius: 4em;
 }
+.tableComplaint{
+    width: 60%;
+    margin-left: 16%;
+    margin-top: 11%;
+}
+thead{
+    background-color: gainsboro;
+}
+

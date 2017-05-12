@@ -36,7 +36,11 @@ class SideBarNavigation extends Component {
                         </i><span className="hidden-xs hidden-sm">
                         Complaint
                     </span></Link></li>
-                    <li><a href="#"><i className="fa fa-cog" aria-hidden="true"></i><span className="hidden-xs hidden-sm">Setting</span></a></li>
+                    <li><Link to="/dashboard/viewComplaint">
+                        <i className="fa fa-list" aria-hidden="true">
+                        </i><span className="hidden-xs hidden-sm">
+                         View Complaint
+                    </span></Link></li>
                 </ul>
             </div>
         )

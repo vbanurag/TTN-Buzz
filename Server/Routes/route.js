@@ -64,6 +64,10 @@ module.exports= (app)=>{
         }else{
             res.redirect('http://anuragsharma.com:9000/');
         }
+       /* req.session.destroy(function() {
+            res.clearCookie('userId');
+            res.redirect('http://anuragsharma.com:9000/');
+        });*/
     })
 
 

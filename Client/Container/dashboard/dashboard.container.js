@@ -7,16 +7,12 @@ import Buzz from './../../Components/CreateBuzz.dashboard';
 import ProfileCard from './../../Components/profileCard.dashboard';
 import SidebarMenu from './../../Components/sidebar.menu.dashboard';
 import FeedContainer from './../../Components/statusfeed';
-import ComplaintContainer from './../../Components/Complaint/complaint.dashboard'
+import ComplaintContainer from './../../Components/Complaint/complaint.dashboard';
+import ShowComplaint from './../../Components/Complaint/complaint.show.dashboard';
 import './dashboard.css';
 import './dashboard-2.css';
 import './dashboard-3.css';
-import {
-    BrowserRouter as Router ,
-    Link
-    ,Route,
-    Redirect
-} from 'react-router-dom';
+
 class Dashboard extends Component {
     constructor(props) {
         super(props);
@@ -56,6 +52,11 @@ class Dashboard extends Component {
                         {
                             this.props.location.pathname == '/dashboard/complaint'?
                                 <ComplaintContainer />
+                                : <span></span>
+                        }
+                        {
+                            this.props.location.pathname == '/dashboard/viewComplaint'?
+                                <ShowComplaint />
                                 : <span></span>
                         }
                     </div>

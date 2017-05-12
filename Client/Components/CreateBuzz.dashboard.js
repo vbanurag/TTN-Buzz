@@ -18,10 +18,13 @@ class Buzz extends Component {
                 category:''
             },
             file:'',
-            imagePreviewUrl:''
+            imagePreviewUrl:'',
+            err:'Invalid Field',
+            isInvalid:false
         }
     }
     onChangeHandler(e){
+        this.setState({ isInvalid:false });
         const { data } = this.state;
         data[e.target.name] = e.target.value;
         console.log('----stattus ....',data)
@@ -41,8 +44,12 @@ class Buzz extends Component {
     onClickHandler(e){
         e.preventDefault();
         const dispatch = this.props.props;
-        //this.props.createBuzz(this.state);
-        dispatch.props.dispatch(createPost(this.state));
+        const { data } = this.state;
+        if(data.status || data.imageFile ){
+            dispatch.props.dispatch(createPost(this.state));
+        }else{
+            this.setState({isInvalid:true})
+        }
     }
 
     render() {
@@ -88,6 +95,7 @@ class Buzz extends Component {
                                             </select>
                                         </li>
                                     </ul>
+                                    {this.state.isInvalid?<span>{this.state.err}</span>:<span></span>}
                                     <button
                                         className="statusButton btn btn-success green"
                                         onClick={ this.onClickHandler.bind(this)}
