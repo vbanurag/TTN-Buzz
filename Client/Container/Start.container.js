@@ -42,7 +42,7 @@ class StartContainer extends Component {
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<a href="http://localhost:4500/"></a>
+                        :<span></span>
                     }
                     {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/LostAndFound'
@@ -67,6 +67,20 @@ class StartContainer extends Component {
                     }
                     {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/viewComplaint'
+                               render={ props => (
+                                   <Dashboard { ...props}
+                                              props = { this.props }/>)} />
+                        :<Link to='/'/>
+                    }
+                    {!Array.isArray(this.props.props.userReducer.users)?
+                        <Route exact path='/dashboard/profile/:email'
+                               render={ props => (
+                                   <Dashboard { ...props}
+                                              props = { this.props }/>)} />
+                        :<Link to='/'/>
+                    }
+                    {!Array.isArray(this.props.props.userReducer.users)?
+                        <Route exact path='/dashboard/profile/user/:email'
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />

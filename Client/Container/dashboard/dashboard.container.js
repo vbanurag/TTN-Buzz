@@ -9,6 +9,10 @@ import SidebarMenu from './../../Components/sidebar.menu.dashboard';
 import FeedContainer from './../../Components/statusfeed';
 import ComplaintContainer from './../../Components/Complaint/complaint.dashboard';
 import ShowComplaint from './../../Components/Complaint/complaint.show.dashboard';
+import Profile from './../../Components/profile/profile.dashboard';
+import {
+    Link
+} from 'react-router-dom';
 import './dashboard.css';
 import './dashboard-2.css';
 import './dashboard-3.css';
@@ -37,7 +41,7 @@ class Dashboard extends Component {
                                     <Buzz props = {this.props.props} route={this.props}  />
                                     <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
                                 </div>
-                                : <span></span>
+                                : <Link to="/"/>
                         }
                         {
                             this.props.location.pathname == '/dashboard/LostAndFound'?
@@ -58,6 +62,16 @@ class Dashboard extends Component {
                             this.props.location.pathname == '/dashboard/viewComplaint'?
                                 <ShowComplaint />
                                 : <span></span>
+                        }
+                        {
+                            this.props.match.path == '/dashboard/profile/:email'?
+                                <Profile props={this.props}/>
+                                : <Link to="/"/>
+                        }
+                        {
+                            this.props.match.path == '/dashboard/profile/user/:email'?
+                                <Profile props={this.props}/>
+                                : <Link to="/"/>
                         }
                     </div>
                 </div>

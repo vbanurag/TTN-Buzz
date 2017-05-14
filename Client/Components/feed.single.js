@@ -2,6 +2,9 @@
  * Created by anurag on 9/5/17.
  */
 import React, { Component } from 'react';
+import {
+    Link
+} from 'react-router-dom';
 
 class Feeds extends Component {
     constructor(props) {
@@ -39,9 +42,11 @@ class Feeds extends Component {
                 <div className="postheader">
                     <img src={user.imagUrl} alt="User Image" />
                     <div className="user">
-                        <span className="Username">
-                            { user.displayName }
-                        </span>
+                        <Link to={`/dashboard/profile/user/${user.email}`}>
+                            <span className="Username">
+                                { user.displayName }
+                            </span>
+                        </Link>
                         <div className="userDetails">
                             <span className="email">{`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`}</span>
                         </div>
