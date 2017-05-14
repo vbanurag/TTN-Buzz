@@ -32,4 +32,8 @@ const PostSchema = new Mongoose.Schema({
     }
 },{ versionKey: false, timestamps: true});
 
+PostSchema.set({autoIndex: false});
+PostSchema.index({postedBy: 1, sparse: true});
+PostSchema.index({})
+
 module.exports = Mongoose.model('Post', PostSchema);
