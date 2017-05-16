@@ -9,22 +9,94 @@ exports.createPost=(post,res)=>{
         if(err){
             res.send(err)
         }else{
-            Post.find((err,allPost) => {
-                if(err){
-                    res.send(err)
-                }else{
-                    res.send(allPost);
-                }
-            })
+            fetchAllPost(res);
         }
     })
 }
 exports.getPosts = (res) => {
-   Post.find({}).sort({createdAt: -1}).populate('postedBy').exec((err,allPost)=> {
-       if(err){
-           res.send(err);
-       }else{
-           res.send(allPost);
-       }
-   })
+   fetchAllPost(res);
+}
+exports.updateLikeDislike = (opinion,res) => {
+    if(opinion.choose=='LIKE'){
+        Post.find({'dislikeBy.dislikes':{'$in': [opinion.user._id]}}, (err,data) => {
+            if(data.length==0){
+                Post.updateOne({_id: opinion.id},{'$addToSet': {'likeBy.likes': opinion.user._id}, '$inc' :{'likeBy.count':1}},(err,updateData) => {
+                    if(err){
+                        res.send(err);
+                    }else{
+                        updatedPost(opinion.id,res);
+                        //res.send(updateData);
+                    }
+                })
+            } else if (data.length >=1){
+                Post.updateOne({_id: opinion.id},{'$pull' : {'dislikeBy.dislikes': opinion.user._id}, '$inc' :{'dislikeBy.count':-1}},(err,data) => {
+                    if(err){
+                        res.send(err);
+                    }else{
+                        Post.updateOne({_id: opinion.id},{'$addToSet': {'likeBy.likes': opinion.user._id}, '$inc' :{'likeBy.count':1}},(err,updateData) => {
+                            if(err){
+                                res.send(err);
+                            }else{
+                                updatedPost(opinion.id,res);
+                                //res.send(updateData);
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }else if(opinion.choose == 'DISLIKE'){
+        Post.find({'likeBy.likes':{'$in': [opinion.user._id]}}, (err,data) => {
+            if(data.length==0){
+                console.log('data--in dilike---',data);
+                Post.update({_id: opinion.id},{'$addToSet': {'dislikeBy.dislikes': opinion.user._id},'$inc' :{'dislikeBy.count':1}},(err,updateData) => {
+                    if(err){
+                        res.send(err);
+                    }else{
+                        updatedPost(opinion.id,res);
+                        //res.send(updateData);
+                    }
+                })
+            } else if (data.length >= 1){
+                Post.update({_id: opinion.id},{'$pull' : {'likeBy.likes': opinion.user._id},'$inc' :{'likeBy.count':-1}},(err,data) => {
+                    if(err){
+                        res.send(err);
+                    }else{
+                        Post.update({_id: opinion.id},{'$addToSet': {'dislikeBy.dislikes': opinion.user._id},'$inc' :{'dislikeBy.count':1}},(err,updateData) => {
+                            if(err){
+                                res.send(err);
+                            }else{
+                                updatedPost(opinion.id,res);
+                                //res.send(updateData);
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+}
+
+const updatedPost = (id,res) => {
+    console.log('extra method called ----',id)
+    Post.find({_id:id}).populate('postedBy').populate('likeBy.likes').populate('dislikeBy.dislikes')
+        .exec( (err,post )=> {
+            if(err){
+                res.send(err);
+            }else{
+                console.log('-------post-----',post);
+                res.send(post);
+            }
+        })
+}
+
+const fetchAllPost = (res) => {
+    Post.find({}).sort({createdAt: -1}).populate('postedBy').exec((err,allPost)=> {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(allPost);
+        }
+    })
 }

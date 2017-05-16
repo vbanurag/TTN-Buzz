@@ -24,5 +24,9 @@ module.exports = (app) => {
         checkLoginMiddleware.isLoggedIn,
         postController.getPosts
     )
+    app.put('/api/posts/like_dislike',
+        checkLoginMiddleware.isLoggedIn,
+        postController.updateLikeDislike
+    )
 
 }

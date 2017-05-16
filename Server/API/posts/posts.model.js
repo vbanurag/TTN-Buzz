@@ -12,20 +12,24 @@ const PostSchema = new Mongoose.Schema({
     imageUrl : String,
     videoUrl : String,
     content : String,
-    count : {
-        likes : {
-            type : Number,
-            default: 0},
-        dislikes : {
-            type : Number,
-            default: 0},
+    likeBy : {
+        likes : [{
+            type:Mongoose.Schema.Types.ObjectId,
+            ref:'User'}],
+        count: {
+            type: Number,
+            default : 0
+        }
     },
-    opinion : [{
-        userId : String,
-        name : String,
-        imageUrl : String,
-        category : String
-    }],
+    dislikeBy : {
+        dislikes : [{
+            type:Mongoose.Schema.Types.ObjectId,
+            ref:'User'}],
+        count: {
+            type: Number,
+            default : 0
+        }
+    },
     commentCount : {
         type : Number,
         default : 0
@@ -34,6 +38,6 @@ const PostSchema = new Mongoose.Schema({
 
 PostSchema.set({autoIndex: false});
 PostSchema.index({postedBy: 1, sparse: true});
-PostSchema.index({})
+PostSchema.index({content: 'text' });
 
 module.exports = Mongoose.model('Post', PostSchema);

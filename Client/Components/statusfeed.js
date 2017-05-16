@@ -24,19 +24,23 @@ class StatusFeed extends Component {
                     AllPost.posts.map((item)=> {
                         if(this.props.location=='/dashboard/LostAndFound'){
                             if(item.category=='Lost & Found'){
-                                return <li><Feed data={ item }/></li>
+                                return <li><Feed data={ item }
+                                                 dispatch={this.props.props} />
+                                        </li>
                             }
                         }
                         else if(this.props.location=='/dashboard/buzz'){
                             if(item.category=='BUZZ'){
-                                return <li><Feed data={ item }/></li>
+                                return <li><Feed data={ item }
+                                                 dispatch={this.props.props} />
+                                        </li>
                             }
                         }
                         else{
-                            return <li><Feed data={ item }/></li>
+                            return <li><Feed data={ item } dispatch={this.props.props} /></li>
                         }
                     })
-                    :<span>fail</span>
+                    :<span>Loading</span>
                 }
             </div>
         )

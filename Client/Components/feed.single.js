@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 import {
     Link
 } from 'react-router-dom';
+import {
+    updateLikeDislike
+} from './../Action'
 
 class Feeds extends Component {
     constructor(props) {
@@ -13,27 +16,47 @@ class Feeds extends Component {
             opinion:{
                 like:'',
                 dislike:'',
-                comment:''
+                user:'',
+                choose:''
             }
         }
     }
+    componentWillMount() {
+        const { opinion } = this.state;
+        opinion.like = this.props.data.likeBy.likes.length;
+        opinion.dislike = this.props.data.dislikeBy.dislikes.length;
+
+        this.setState({ opinion });
+
+    }
     onlikeHandler (e) {
         const { opinion } = this.state;
-        opinion.like =1;
-        opinion.dislike=0;
-        this.setState({ opinion })
+        opinion.like +=1;
+        if(opinion.dislike >=1 ){
+            opinion.dislike -= 1;
+            opinion.choose = 'LIKE';
+        }
+        opinion.user=this.props.data.postedBy;
+        opinion.id = this.props.data._id;
+        this.setState({ opinion });
+        this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
 
     }
     onDislikeHandler (e) {
         const { opinion } = this.state;
-        if(opinion.dislike==0){
-            opinion.dislike=1;
-            opinion.like=0;
-            this.setState({ opinion })
+        opinion.dislike +=1 ;
+        if(opinion.like >=1 ){
+            opinion.like -= 1;
+            opinion.choose = 'DISLIKE';
         }
+        opinion.user = this.props.data.postedBy;
+        opinion.id = this.props.data._id;
+        this.setState({ opinion });
+        this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
     }
 
     render() {
+        console.log('feed single ---',this.state.opinion);
         const item = this.props.data;
         const user = Object.assign({},item.postedBy);
         const date = new Date(item.createdAt);
@@ -73,21 +96,16 @@ class Feeds extends Component {
                         <div className="like"
                              name="like"
                              value={this.state.opinion.like}
-                             onClick={this.onlikeHandler.bind(this)}
-                        >
-                            <i className="fa fa-thumbs-up"
-                               aria-hidden="true"
-                               name="like"
-                               onClick={this.onlikeHandler.bind(this)}
-                            >
+                             onClick={this.onlikeHandler.bind(this)}>
+                            <i className="fa fa-thumbs-up" aria-hidden="true">
                             </i><span>{this.state.opinion.like}</span>
                         </div>
                         <div className="dislike" name="dislike"
                              value={this.state.opinion.dislike}
-                             onClick={ this.onDislikeHandler.bind(this) }
-                        >
+                             onClick={ this.onDislikeHandler.bind(this) }>
                             <i className="fa fa-thumbs-down" aria-hidden="true">
-                            </i><span>{this.state.opinion.dislike}</span></div>
+                            </i><span>{this.state.opinion.dislike}</span>
+                        </div>
                         <div className="comment">
                             <i className="fa fa-comment-o" aria-hidden="true">
                             </i><span></span></div>

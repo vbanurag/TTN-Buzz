@@ -4,7 +4,10 @@
 import {
     POST_CREATE_START,
     POST_CREATED_SUCCESS,
-    POST_CREATION_FAIL
+    POST_CREATION_FAIL,
+    UPDATE_LIKE_DISLIKE_START,
+    UPDATE_LIKE_DISLIKE_SUCCESS,
+    UPDATE_LIKE_DISLIKE_ERROR
 } from './../Config/config.constants';
 
 const intialStatePost = {
@@ -32,6 +35,30 @@ export const postReducer = (state=intialStatePost,action) => {
             return {
                 ...state,
                 err: action.err
+            }
+        }
+        case UPDATE_LIKE_DISLIKE_START: {
+            return {
+                ...state,
+                loading: true
+            }
+        }
+        case UPDATE_LIKE_DISLIKE_SUCCESS: {
+            let updatedPost = state.posts;
+            updatedPost.forEach((item,index)=> {
+                if(item._id==action.post[0]._id){
+                    updatedPost[index] = action.post[0];
+                }
+            })
+            return {
+                posts:updatedPost,
+                loading:false
+            }
+        }
+        case UPDATE_LIKE_DISLIKE_ERROR: {
+            return {
+                ...state,
+                loading: true
             }
         }
     }
