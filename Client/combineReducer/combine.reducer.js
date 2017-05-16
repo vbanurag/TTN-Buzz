@@ -6,10 +6,12 @@ import {
 } from 'redux';
 import {
     userReducer,
-    postReducer
+    postReducer,
+    commentReducer
 } from './../Reducer/'
 
 export default combineReducers({
     postReducer,
-    userReducer
+    userReducer,
+    commentReducer
 })

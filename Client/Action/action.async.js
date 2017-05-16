@@ -7,7 +7,10 @@ import {
     POST_CREATE_ONERROR,
     UPDATE_LIKEDISLIKE_START,
     UPDATE_LIKEDISLIKE_SUCCESS,
-    UPDATE_LIKEDISLIKE_ERROR
+    UPDATE_LIKEDISLIKE_ERROR,
+    POST_COMMENT_CREATE_INIT,
+    POST_COMMENT__CREATE_ONSUCCESS,
+    POST_COMMENT__CREATE_ONERROR
 } from './action';
 import fetch from 'isomorphic-fetch';
 
@@ -85,9 +88,47 @@ export const updateLikeDislike = ( opinion ) => {
                 dispatch (UPDATE_LIKEDISLIKE_SUCCESS(post) )
             })
             .catch((err) => {
-                console.log('error in update in like and post -------',err);
                 dispatch(UPDATE_LIKEDISLIKE_ERROR(err))
             })
     }
 }
+export const postComment = ( commentData ) => {
+    console.log('postComment,----------',commentData)
+    return(dispatch) => {
+        dispatch(POST_COMMENT_CREATE_INIT());
+        fetch('http://localhost:4500/api/comment',{
+            credentials: 'include',
+            method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(commentData)
+        })
+            .then( response => response.json() )
+            .then( comments => {
+                dispatch(POST_COMMENT__CREATE_ONSUCCESS(comments));
+            })
+            .catch((err) => {
+                dispatch(POST_COMMENT__CREATE_ONERROR(err));
+            })
+    }
+}
+export const getComment = () => {
+    return(dispatch) => {
+        dispatch(POST_COMMENT_CREATE_INIT());
+        fetch('http://localhost:4500/api/comment',{
+            credentials: 'include',
+            method: 'get',
+        })
+            .then( response => response.json() )
+            .then( comments => {
+                dispatch(POST_COMMENT__CREATE_ONSUCCESS(comments));
+            })
+            .catch((err) => {
+                dispatch(POST_COMMENT__CREATE_ONERROR(err));
+            })
+    }
+}
+
 

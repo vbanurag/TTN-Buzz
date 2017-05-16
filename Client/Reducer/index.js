@@ -1,7 +1,10 @@
 export {
     userReducer
 }
-from './user.reducer'
+from './user.reducer';
 export {
     postReducer
-} from './post.reducer'
+} from './post.reducer';
+export {
+    commentReducer
+} from './comment.reducer';

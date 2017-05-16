@@ -6,7 +6,9 @@ import {
     Link
 } from 'react-router-dom';
 import {
-    updateLikeDislike
+    updateLikeDislike,
+    postComment,
+    getComment
 } from './../Action'
 
 class Feeds extends Component {
@@ -18,6 +20,10 @@ class Feeds extends Component {
                 dislike:'',
                 user:'',
                 choose:''
+            },
+            commentPost: {
+                comment:'',
+                postId:''
             }
         }
     }
@@ -53,6 +59,18 @@ class Feeds extends Component {
         opinion.id = this.props.data._id;
         this.setState({ opinion });
         this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
+    }
+    onCommentChangeHandler(e){
+        const { commentPost } = this.state;
+        commentPost[e.target.name] = e.target.value;
+        commentPost.postId = this.props.data._id;
+        this.setState({ commentPost });
+    }
+    onClickCommentHandler(e){
+        console.log('comment on post , ', this.state.commentPost);
+        this.props.dispatch.dispatch(postComment(this.state.commentPost));
+        this.props.dispatch.dispatch(getComment());
+        this.setState({commentPost: {comment:'', postId:''}});
     }
 
     render() {
@@ -111,8 +129,19 @@ class Feeds extends Component {
                             </i><span></span></div>
                     </div>
                     <div className="postcomment">
-                        <input type="text" placeholder="Type Here" />
-                        <input type="submit" value="POST" />
+                        <div className="form">
+                            <textarea
+                                placeholder="Type Here"
+                                name="comment"
+                                value={this.state.commentPost.comment}
+                                onChange={this.onCommentChangeHandler.bind(this)}
+                            />
+                            <button
+                                className="btn btn-success green"
+                                onClick={this.onClickCommentHandler.bind(this)}>
+                                <i className="fa fa-comments-o"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ const session = require('express-session');
 const cors = require('cors');
 const checkLoginMiddleware = require('./../MIddlewares/logged.check');
 const PostsRoute = require('./../API/posts/post.route');
-
+const commentRoute = require('./../API/comment/comment.route');
 
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
@@ -50,6 +50,7 @@ module.exports= (app)=>{
         }));
 
     PostsRoute(app);
+    commentRoute(app);
     //app.post('/api/posts',checkLoginMiddleware.isLoggedIn,postController.createPost);
 
     app.get('/api/user' ,

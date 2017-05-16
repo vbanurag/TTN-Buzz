@@ -2,6 +2,8 @@ export {
     fetchUser,
     createPost,
     fetchPost,
-    updateLikeDislike
+    updateLikeDislike,
+    postComment,
+    getComment
 }
 from './action.async';

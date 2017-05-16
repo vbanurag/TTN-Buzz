@@ -8,7 +8,10 @@ const PostSchema = new Mongoose.Schema({
         type : String,
         default : 'BUZZ'
     },
-    postedBy: { type:Mongoose.Schema.Types.ObjectId,ref:'User' },
+    postedBy: {
+        type:Mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     imageUrl : String,
     videoUrl : String,
     content : String,
@@ -33,7 +36,11 @@ const PostSchema = new Mongoose.Schema({
     commentCount : {
         type : Number,
         default : 0
-    }
+    },
+    comments: [{
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
 },{ versionKey: false, timestamps: true});
 
 PostSchema.set({autoIndex: false});

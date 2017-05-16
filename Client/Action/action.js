@@ -4,7 +4,10 @@ import {
     POST_CREATION_FAIL,
     UPDATE_LIKE_DISLIKE_START,
     UPDATE_LIKE_DISLIKE_SUCCESS,
-    UPDATE_LIKE_DISLIKE_ERROR
+    UPDATE_LIKE_DISLIKE_ERROR,
+    POST_COMMENT_START,
+    POST_COMMENT_SUCCESS,
+    POST_COMMENT_ERROR
 } from './../Config/config.constants'
 
 export function FETCH_USER_START() {
@@ -33,4 +36,13 @@ export const UPDATE_LIKEDISLIKE_SUCCESS = (post) => {
 }
 export const UPDATE_LIKEDISLIKE_ERROR = (err) => {
     return { type: UPDATE_LIKE_DISLIKE_ERROR , err};
+}
+export const POST_COMMENT_CREATE_INIT = () => {
+    return {type: POST_COMMENT_START };
+}
+export const POST_COMMENT__CREATE_ONSUCCESS = (comments) => {
+    return {type: POST_COMMENT_SUCCESS, comments };
+}
+export const POST_COMMENT__CREATE_ONERROR = (err) => {
+    return {type: POST_COMMENT_ERROR , err };
 }
