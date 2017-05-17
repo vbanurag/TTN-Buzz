@@ -12,5 +12,6 @@ exports.addComment = (req,res,next) => {
     commentService.addComment(dataPass,res);
 }
 exports.getComments = (req,res,next) => {
-    commentService.getComments(res);
+    console.log('get comments -----------',req.query);
+    //commentService.getComments(res);
 }

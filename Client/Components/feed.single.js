@@ -2,6 +2,7 @@
  * Created by anurag on 9/5/17.
  */
 import React, { Component } from 'react';
+import './CSS/commentList.css';
 import {
     Link
 } from 'react-router-dom';
@@ -9,7 +10,8 @@ import {
     updateLikeDislike,
     postComment,
     getComment
-} from './../Action'
+} from './../Action';
+import CommentList from './comment.list.feed';
 
 class Feeds extends Component {
     constructor(props) {
@@ -24,6 +26,10 @@ class Feeds extends Component {
             commentPost: {
                 comment:'',
                 postId:''
+            },
+            display:{
+                value:false,
+                type:'none'
             }
         }
     }
@@ -69,12 +75,22 @@ class Feeds extends Component {
     onClickCommentHandler(e){
         console.log('comment on post , ', this.state.commentPost);
         this.props.dispatch.dispatch(postComment(this.state.commentPost));
-        this.props.dispatch.dispatch(getComment());
+        //this.props.dispatch.dispatch(getComment(this.state.commentPost.postId));
         this.setState({commentPost: {comment:'', postId:''}});
+    }
+    onClickCommentDisplayToggle(e){
+        const { display } = this.state;
+        if(display.value){
+            display.value=false;
+            display.type='none';
+        }else{
+            display.value=true;
+            display.type='';
+        }
+        this.setState({display});
     }
 
     render() {
-        console.log('feed single ---',this.state.opinion);
         const item = this.props.data;
         const user = Object.assign({},item.postedBy);
         const date = new Date(item.createdAt);
@@ -124,23 +140,33 @@ class Feeds extends Component {
                             <i className="fa fa-thumbs-down" aria-hidden="true">
                             </i><span>{this.state.opinion.dislike}</span>
                         </div>
-                        <div className="comment">
+                        <div className="comment"
+                             onClick={ this.onClickCommentDisplayToggle.bind(this) }>
                             <i className="fa fa-comment-o" aria-hidden="true">
                             </i><span></span></div>
                     </div>
-                    <div className="postcomment">
-                        <div className="form">
-                            <textarea
-                                placeholder="Type Here"
-                                name="comment"
-                                value={this.state.commentPost.comment}
-                                onChange={this.onCommentChangeHandler.bind(this)}
-                            />
-                            <button
-                                className="btn btn-success green"
-                                onClick={this.onClickCommentHandler.bind(this)}>
-                                <i className="fa fa-comments-o"></i>
-                            </button>
+                    <div className="postcomment" style={{display:this.state.display.type}}>
+                        <div className="post-footer">
+                            <form>
+                                <textarea
+                                    className="comment-textArea"
+                                    placeholder="Type Here"
+                                    name="comment"
+                                    value={this.state.commentPost.comment}
+                                    onChange={this.onCommentChangeHandler.bind(this)}
+                                />
+                                    <button
+                                        className="btn btn-success green comment-btn"
+                                        onClick={this.onClickCommentHandler.bind(this)}>
+                                        <i className="fa fa-comments-o"></i>
+                                    </button>
+                            </form>
+                            {item.comments.length>=0?
+                                item.comments.map((item) => (
+                                    <CommentList user={ user } comment = {item}/>
+                                ))
+                                :<span></span>
+                            }
                         </div>
                     </div>
                 </div>

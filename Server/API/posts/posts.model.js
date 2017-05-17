@@ -19,23 +19,11 @@ const PostSchema = new Mongoose.Schema({
         likes : [{
             type:Mongoose.Schema.Types.ObjectId,
             ref:'User'}],
-        count: {
-            type: Number,
-            default : 0
-        }
     },
     dislikeBy : {
         dislikes : [{
             type:Mongoose.Schema.Types.ObjectId,
             ref:'User'}],
-        count: {
-            type: Number,
-            default : 0
-        }
-    },
-    commentCount : {
-        type : Number,
-        default : 0
     },
     comments: [{
         type: Mongoose.Schema.Types.ObjectId,

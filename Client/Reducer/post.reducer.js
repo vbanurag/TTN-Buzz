@@ -7,7 +7,8 @@ import {
     POST_CREATION_FAIL,
     UPDATE_LIKE_DISLIKE_START,
     UPDATE_LIKE_DISLIKE_SUCCESS,
-    UPDATE_LIKE_DISLIKE_ERROR
+    UPDATE_LIKE_DISLIKE_ERROR,
+    POST_COMMENT_SUCCESS
 } from './../Config/config.constants';
 
 const intialStatePost = {
@@ -59,6 +60,19 @@ export const postReducer = (state=intialStatePost,action) => {
             return {
                 ...state,
                 loading: true
+            }
+        }
+        case POST_COMMENT_SUCCESS: {
+            console.log(action.postUpdated,'-----------sucessfull comment')
+            let updatedPost = state.posts;
+            updatedPost.forEach((item,index)=> {
+                if(item._id==action.postUpdated[0]._id){
+                    updatedPost[index] = action.postUpdated[0];
+                }
+            })
+            return {
+                posts:updatedPost,
+                loading:false
             }
         }
     }

@@ -114,10 +114,10 @@ export const postComment = ( commentData ) => {
             })
     }
 }
-export const getComment = () => {
+/*export const getComment = (id) => {
     return(dispatch) => {
         dispatch(POST_COMMENT_CREATE_INIT());
-        fetch('http://localhost:4500/api/comment',{
+        fetch('http://localhost:4500/api/comment/'+id,{
             credentials: 'include',
             method: 'get',
         })
@@ -129,6 +129,6 @@ export const getComment = () => {
                 dispatch(POST_COMMENT__CREATE_ONERROR(err));
             })
     }
-}
+}*/
 
 

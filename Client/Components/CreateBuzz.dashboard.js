@@ -38,7 +38,7 @@ class Buzz extends Component {
             });
         }
 
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(file);
         this.setState({data});
     }
     onClickHandler(e){

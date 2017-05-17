@@ -20,7 +20,7 @@ exports.updateLikeDislike = (opinion,res) => {
     if(opinion.choose=='LIKE'){
         Post.find({'dislikeBy.dislikes':{'$in': [opinion.user._id]}}, (err,data) => {
             if(data.length==0){
-                Post.updateOne({_id: opinion.id},{'$addToSet': {'likeBy.likes': opinion.user._id}, '$inc' :{'likeBy.count':1}},(err,updateData) => {
+                Post.updateOne({_id: opinion.id},{'$addToSet': {'likeBy.likes': opinion.user._id}},(err,updateData) => {
                     if(err){
                         res.send(err);
                     }else{
@@ -29,11 +29,11 @@ exports.updateLikeDislike = (opinion,res) => {
                     }
                 })
             } else if (data.length >=1){
-                Post.updateOne({_id: opinion.id},{'$pull' : {'dislikeBy.dislikes': opinion.user._id}, '$inc' :{'dislikeBy.count':-1}},(err,data) => {
+                Post.updateOne({_id: opinion.id},{'$pull' : {'dislikeBy.dislikes': opinion.user._id}},(err,data) => {
                     if(err){
                         res.send(err);
                     }else{
-                        Post.updateOne({_id: opinion.id},{'$addToSet': {'likeBy.likes': opinion.user._id}, '$inc' :{'likeBy.count':1}},(err,updateData) => {
+                        Post.updateOne({_id: opinion.id},{'$addToSet': {'likeBy.likes': opinion.user._id}},(err,updateData) => {
                             if(err){
                                 res.send(err);
                             }else{
@@ -49,7 +49,7 @@ exports.updateLikeDislike = (opinion,res) => {
         Post.find({'likeBy.likes':{'$in': [opinion.user._id]}}, (err,data) => {
             if(data.length==0){
                 console.log('data--in dilike---',data);
-                Post.update({_id: opinion.id},{'$addToSet': {'dislikeBy.dislikes': opinion.user._id},'$inc' :{'dislikeBy.count':1}},(err,updateData) => {
+                Post.update({_id: opinion.id},{'$addToSet': {'dislikeBy.dislikes': opinion.user._id}},(err,updateData) => {
                     if(err){
                         res.send(err);
                     }else{
@@ -58,11 +58,11 @@ exports.updateLikeDislike = (opinion,res) => {
                     }
                 })
             } else if (data.length >= 1){
-                Post.update({_id: opinion.id},{'$pull' : {'likeBy.likes': opinion.user._id},'$inc' :{'likeBy.count':-1}},(err,data) => {
+                Post.update({_id: opinion.id},{'$pull' : {'likeBy.likes': opinion.user._id}},(err,data) => {
                     if(err){
                         res.send(err);
                     }else{
-                        Post.update({_id: opinion.id},{'$addToSet': {'dislikeBy.dislikes': opinion.user._id},'$inc' :{'dislikeBy.count':1}},(err,updateData) => {
+                        Post.update({_id: opinion.id},{'$addToSet': {'dislikeBy.dislikes': opinion.user._id}},(err,updateData) => {
                             if(err){
                                 res.send(err);
                             }else{
@@ -80,7 +80,10 @@ exports.updateLikeDislike = (opinion,res) => {
 
 const updatedPost = (id,res) => {
     console.log('extra method called ----',id)
-    Post.find({_id:id}).populate('postedBy').populate('likeBy.likes').populate('dislikeBy.dislikes')
+    Post.find({_id:id}).populate('postedBy')
+        .populate('likeBy.likes')
+        .populate('dislikeBy.dislikes')
+        .populate('comments')
         .exec( (err,post )=> {
             if(err){
                 res.send(err);
@@ -90,9 +93,16 @@ const updatedPost = (id,res) => {
             }
         })
 }
+exports.getUpdatedPost = updatedPost;
 
 const fetchAllPost = (res) => {
-    Post.find({}).sort({createdAt: -1}).populate('postedBy').exec((err,allPost)=> {
+    Post.find({})
+        .sort({createdAt: -1})
+        .populate('postedBy')
+        .populate('likeBy.likes')
+        .populate('dislikeBy.dislikes')
+        .populate('comments')
+        .exec((err,allPost)=> {
         if(err){
             res.send(err);
         }else{

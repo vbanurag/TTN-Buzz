@@ -40,8 +40,8 @@ export const UPDATE_LIKEDISLIKE_ERROR = (err) => {
 export const POST_COMMENT_CREATE_INIT = () => {
     return {type: POST_COMMENT_START };
 }
-export const POST_COMMENT__CREATE_ONSUCCESS = (comments) => {
-    return {type: POST_COMMENT_SUCCESS, comments };
+export const POST_COMMENT__CREATE_ONSUCCESS = (postUpdated) => {
+    return {type: POST_COMMENT_SUCCESS, postUpdated };
 }
 export const POST_COMMENT__CREATE_ONERROR = (err) => {
     return {type: POST_COMMENT_ERROR , err };
