@@ -7,11 +7,13 @@ import {
 import {
     userReducer,
     postReducer,
-    commentReducer
+    commentReducer,
+    complaintReducer
 } from './../Reducer/'
 
 export default combineReducers({
     postReducer,
     userReducer,
-    commentReducer
+    commentReducer,
+    complaintReducer
 })

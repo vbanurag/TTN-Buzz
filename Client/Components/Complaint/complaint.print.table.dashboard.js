@@ -6,11 +6,11 @@ import React,{ Component } from 'react';
 const PrintTable = (props) => {
     return(
         <tr>
-            <td>1</td>
-            <td>dcjdk</td>
-            <td>@mdo</td>
-            <td>fd</td>
-            <td>grtg</td>
+            <td>{props.sNo+1}</td>
+            <td>{props.data._id}</td>
+            <td>{props.data.category}</td>
+            <td>{props.data.status}</td>
+            <td>{props.data.complaintBy.displayName}</td>
         </tr>
     )
 }

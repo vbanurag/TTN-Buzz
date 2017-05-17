@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import {
     connect
 } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter,Route } from 'react-router-dom';
 import Container from './Start.container';
 import {
     browserHistory

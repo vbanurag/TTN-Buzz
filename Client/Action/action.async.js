@@ -10,7 +10,10 @@ import {
     UPDATE_LIKEDISLIKE_ERROR,
     POST_COMMENT_CREATE_INIT,
     POST_COMMENT__CREATE_ONSUCCESS,
-    POST_COMMENT__CREATE_ONERROR
+    POST_COMMENT__CREATE_ONERROR,
+    POST_COMPLAINT_INIT,
+    POST_COMPLAINT_ONSUCCESS,
+    POST_COMPLAINT_ONERROR
 } from './action';
 import fetch from 'isomorphic-fetch';
 
@@ -114,21 +117,43 @@ export const postComment = ( commentData ) => {
             })
     }
 }
-/*export const getComment = (id) => {
-    return(dispatch) => {
-        dispatch(POST_COMMENT_CREATE_INIT());
-        fetch('http://localhost:4500/api/comment/'+id,{
+
+export const postComplaint = (complain) => {
+    return (dispatch) => {
+        dispatch(POST_COMPLAINT_INIT);
+        fetch('http://localhost:4500/api/complaint',{
             credentials: 'include',
-            method: 'get',
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(complain)
         })
             .then( response => response.json() )
-            .then( comments => {
-                dispatch(POST_COMMENT__CREATE_ONSUCCESS(comments));
+            .then( complain => {
+                dispatch(POST_COMPLAINT_ONSUCCESS(complain))
             })
             .catch((err) => {
-                dispatch(POST_COMMENT__CREATE_ONERROR(err));
+                dispatch(POST_COMPLAINT_ONERROR(err))
             })
     }
-}*/
+}
+export const getComplaint = () => {
+    return (dispatch) => {
+        dispatch(POST_COMPLAINT_INIT);
+        fetch('http://localhost:4500/api/complaint',{
+            credentials: 'include',
+            method:'GET'
+        })
+            .then( response => response.json() )
+            .then( complain => {
+                dispatch(POST_COMPLAINT_ONSUCCESS(complain))
+            })
+            .catch((err) => {
+                dispatch(POST_COMPLAINT_ONERROR(err))
+            })
+    }
+}
 
 

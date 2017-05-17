@@ -9,6 +9,7 @@ const cors = require('cors');
 const checkLoginMiddleware = require('./../MIddlewares/logged.check');
 const PostsRoute = require('./../API/posts/post.route');
 const commentRoute = require('./../API/comment/comment.route');
+const complaintRoute = require('./../API/Complaints/complaints.route');
 
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
@@ -51,6 +52,7 @@ module.exports= (app)=>{
 
     PostsRoute(app);
     commentRoute(app);
+    complaintRoute(app);
     //app.post('/api/posts',checkLoginMiddleware.isLoggedIn,postController.createPost);
 
     app.get('/api/user' ,

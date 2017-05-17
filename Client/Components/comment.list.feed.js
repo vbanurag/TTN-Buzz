@@ -9,7 +9,6 @@ class CommentDisplay extends Component {
         super(props);
     }
     render() {
-        console.log(this.props,'-------------commmenting biox')
         return(
             <div className="post-footer">
                 <ul className="comments-list">

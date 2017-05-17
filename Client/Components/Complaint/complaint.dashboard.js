@@ -10,7 +10,7 @@ class Complaint extends Component {
     }
     render() {
         return(
-            <ComplaintForm />
+            <ComplaintForm props={this.props.props} />
         )
     }
 }

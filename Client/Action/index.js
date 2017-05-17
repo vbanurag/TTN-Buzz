@@ -4,6 +4,7 @@ export {
     fetchPost,
     updateLikeDislike,
     postComment,
-    getComment
+    postComplaint,
+    getComplaint
 }
 from './action.async';

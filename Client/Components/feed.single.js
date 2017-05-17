@@ -147,6 +147,12 @@ class Feeds extends Component {
                     </div>
                     <div className="postcomment" style={{display:this.state.display.type}}>
                         <div className="post-footer">
+                            {item.comments.length>=0?
+                                item.comments.map((item) => (
+                                    <CommentList user={ user } comment = {item}/>
+                                ))
+                                :<span></span>
+                            }
                             <form>
                                 <textarea
                                     className="comment-textArea"
@@ -161,12 +167,6 @@ class Feeds extends Component {
                                         <i className="fa fa-comments-o"></i>
                                     </button>
                             </form>
-                            {item.comments.length>=0?
-                                item.comments.map((item) => (
-                                    <CommentList user={ user } comment = {item}/>
-                                ))
-                                :<span></span>
-                            }
                         </div>
                     </div>
                 </div>

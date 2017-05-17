@@ -3,6 +3,9 @@
  */
 import React, { Component } from 'react';
 import './complaint.css';
+import {
+    postComplaint
+} from'./../../Action'
 
 class ComplaintForm extends Component {
     constructor(props) {
@@ -10,12 +13,29 @@ class ComplaintForm extends Component {
         this.state={
             complaint: {
                 title:'',
-
+                description:'',
+                category:''
             }
         }
     }
-    onChangeHandler(e) {
+     onChangeHandler(e) {
+        const { complaint } = this.state;
+        complaint[e.target.name] = e.target.value;
+        this.setState({complaint});
+        console.log(this.state.complaint,'----------in complaint ')
 
+    }
+    onClickhandler(e) {
+        e.preventDefault();
+        const asyncCall = this.props.props.props.props;
+        asyncCall.dispatch(postComplaint(this.state.complaint));
+        this.setState({
+            complaint: {
+                title:'',
+                description:'',
+                category:''
+            }
+        })
     }
     render() {
         return(
@@ -25,24 +45,36 @@ class ComplaintForm extends Component {
                         <br className="brTag" ></br>
                         <h3 className="title" >Complaint Form</h3>
                         <div className="form-group">
-                            <input type="text" className="form-control" id="name" name="title" placeholder="Title" required/>
+                            <input type="text"
+                                   className="form-control"
+                                   id="name" name="title"
+                                   placeholder="Title"
+                                   value={ this.state.complaint.title }
+                                   onChange={ this.onChangeHandler.bind(this) }
+                                   required/>
                         </div>
                         <div className="form-group">
                             <textarea className="form-control"
                                       type="textarea"
                                       placeholder="Description"
-                                      name="Description"
+                                      value={ this.state.complaint.description }
+                                      onChange={ this.onChangeHandler.bind(this) }
+                                      name="description"
                             ></textarea>
                         </div>
                         <div className="form-group">
-                            <select className="selectpicker" >
-                                <option >Hardware</option>
-                                <option>Software</option>
-                                <option>Infrastructure</option>
-                                <option>Other</option>
+                            <select className="form-control"
+                                    onChange={ this.onChangeHandler.bind(this) }
+                                    name="category" >
+                                <option value='Hardware'>Hardware</option>
+                                <option value='Software'>Software</option>
+                                <option value='Infrastructure'>Infrastructure</option>
+                                <option value='Other'>Other</option>
                             </select>
                         </div>
-                        <button  name="submit" className="btn-danger pull-right">Submit Form</button>
+                        <button
+                            onClick={ this.onClickhandler.bind(this) }
+                            className="btn btn-danger pull-right">Submit Form</button>
                     </form>
                 </div>
             </div>

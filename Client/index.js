@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 
 render(
+
     <Provider store = { store } >
             <App/>
     </Provider>,

@@ -7,7 +7,10 @@ import {
     UPDATE_LIKE_DISLIKE_ERROR,
     POST_COMMENT_START,
     POST_COMMENT_SUCCESS,
-    POST_COMMENT_ERROR
+    POST_COMMENT_ERROR,
+    POST_COMPLAINT_START,
+    POST_COMPLAINT_SUCCESS,
+    POST_COMPLAINT_ERROR
 } from './../Config/config.constants'
 
 export function FETCH_USER_START() {
@@ -45,4 +48,16 @@ export const POST_COMMENT__CREATE_ONSUCCESS = (postUpdated) => {
 }
 export const POST_COMMENT__CREATE_ONERROR = (err) => {
     return {type: POST_COMMENT_ERROR , err };
+}
+
+export const POST_COMPLAINT_INIT =() => {
+    return{ type: POST_COMPLAINT_START }
+}
+
+export const POST_COMPLAINT_ONSUCCESS =(complaint) => {
+    return{ type: POST_COMPLAINT_SUCCESS, complaint }
+}
+
+export const POST_COMPLAINT_ONERROR = (err) => {
+    return{ type: POST_COMPLAINT_ERROR, err}
 }

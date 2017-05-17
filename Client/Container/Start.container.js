@@ -30,12 +30,13 @@ class StartContainer extends Component {
 
     render() {
         console.log(this.props,'this props---final', Array.isArray(this.props.props.userReducer.users)  )
+        const homePath = <Route exact path='/'
+                                render={ props =>
+                                    (<Login { ...props }
+                                            props = { this.props }/>)}/>;
         return(
                 <div>
-                    <Route exact path='/'
-                           render={ props =>
-                               (<Login { ...props }
-                                       props = { this.props }/>)}/>
+                    {homePath}
 
                     { !Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard'
@@ -49,7 +50,7 @@ class StartContainer extends Component {
                                render={ props => (
                                    <Dashboard { ...props}
                                               props = { this.props }/>)} />
-                        :<Link to='/'/>
+                        :<Link to={homePath}/>
                     }
                     {!Array.isArray(this.props.props.userReducer.users)?
                         <Route exact path='/dashboard/buzz'

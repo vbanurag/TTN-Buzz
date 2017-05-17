@@ -55,12 +55,12 @@ class Dashboard extends Component {
                         }
                         {
                             this.props.location.pathname == '/dashboard/complaint'?
-                                <ComplaintContainer />
+                                <ComplaintContainer props={this.props} />
                                 : <span></span>
                         }
                         {
                             this.props.location.pathname == '/dashboard/viewComplaint'?
-                                <ShowComplaint />
+                                <ShowComplaint props={this.props} />
                                 : <span></span>
                         }
                         {

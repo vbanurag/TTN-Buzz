@@ -8,3 +8,6 @@ export {
 export {
     commentReducer
 } from './comment.reducer';
+export {
+    complaintReducer
+} from './complaint.reducer'
