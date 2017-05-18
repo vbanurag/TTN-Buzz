@@ -17,19 +17,27 @@ import Dashboard from './dashboard/dashboard.container';
 import {
     fetchUser
 } from './../Action/';
+import ReactRedirect
+ from 'react-redirect';
 
 
 
 class StartContainer extends Component {
     constructor(props){
         super(props);
+        this.state={
+            loggedIn:false
+
+        }
     }
     componentWillMount(){
         this.props.props.dispatch(fetchUser());
+
     }
 
+
     render() {
-        console.log(this.props,'this props---final', Array.isArray(this.props.props.userReducer.users)  )
+        console.log(this.props,'this props---final', Array.isArray(this.props.props.userReducer.users),'------',this.props.props.userReducer.users.role  )
         const homePath = <Route exact path='/'
                                 render={ props =>
                                     (<Login { ...props }
@@ -37,56 +45,43 @@ class StartContainer extends Component {
         return(
                 <div>
                     {homePath}
-
                     { !Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<span></span>
+                        <div>
+                            <Route exact path='/dashboard'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                            <Route exact path='/dashboard/LostAndFound'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                            <Route exact path='/dashboard/buzz'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                            <Route exact path='/dashboard/complaint'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                            <Route exact path='/dashboard/viewComplaint'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                            <Route exact path='/dashboard/profile/:email'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                            <Route exact path='/dashboard/profile/user/:email'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
+                        </div>
+
+                        :<div>
+
+                        </div>
                     }
-                    {!Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard/LostAndFound'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<Link to={homePath}/>
-                    }
-                    {!Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard/buzz'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<Link to='/'/>
-                    }
-                    {!Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard/complaint'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<Link to='/'/>
-                    }
-                    {!Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard/viewComplaint'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<Link to='/'/>
-                    }
-                    {!Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard/profile/:email'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<Link to='/'/>
-                    }
-                    {!Array.isArray(this.props.props.userReducer.users)?
-                        <Route exact path='/dashboard/profile/user/:email'
-                               render={ props => (
-                                   <Dashboard { ...props}
-                                              props = { this.props }/>)} />
-                        :<Link to='/'/>
-                    }
+
                 </div>
         )
     }

@@ -3,7 +3,7 @@
  */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack')
+const webpack = require('webpack');
 module.exports = {
 
     entry: './Client/index.js',
@@ -27,6 +27,7 @@ module.exports = {
             minimize: false,
             debug: true,
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
@@ -34,7 +35,9 @@ module.exports = {
         host: 'anuragsharma.com',
         port: 9000,
         stats: 'errors-only',
-        historyApiFallback: true
+        historyApiFallback: true,
+        hot: true,
+        inline: true
     }
     // devServer: {
     //     host: 'anuragsharma.com', // Defaults to `localhost`

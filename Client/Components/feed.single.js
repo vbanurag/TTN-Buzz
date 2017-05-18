@@ -2,6 +2,7 @@
  * Created by anurag on 9/5/17.
  */
 import React, { Component } from 'react';
+
 import './CSS/commentList.css';
 import {
     Link
@@ -53,6 +54,7 @@ class Feeds extends Component {
         this.setState({ opinion });
         this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
 
+
     }
     onDislikeHandler (e) {
         const { opinion } = this.state;
@@ -73,9 +75,9 @@ class Feeds extends Component {
         this.setState({ commentPost });
     }
     onClickCommentHandler(e){
+        e.preventDefault();
         console.log('comment on post , ', this.state.commentPost);
         this.props.dispatch.dispatch(postComment(this.state.commentPost));
-        //this.props.dispatch.dispatch(getComment(this.state.commentPost.postId));
         this.setState({commentPost: {comment:'', postId:''}});
     }
     onClickCommentDisplayToggle(e){

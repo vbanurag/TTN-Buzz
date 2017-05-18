@@ -41,7 +41,7 @@ class Dashboard extends Component {
                                     <Buzz props = {this.props.props} route={this.props}  />
                                     <FeedContainer props={this.props.props.props} location={this.props.location.pathname} />
                                 </div>
-                                : <Link to="/"/>
+                                : <Link to="http://anuragsharma.com:9000/"/>
                         }
                         {
                             this.props.location.pathname == '/dashboard/LostAndFound'?

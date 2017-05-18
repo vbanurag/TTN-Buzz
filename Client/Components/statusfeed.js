@@ -2,11 +2,13 @@
  * Created by anurag on 9/5/17.
  */
 import React, { Component } from 'react';
+import LazyLoad from 'react-lazyload';
 import Feed from './feed.single';
 import {
     fetchPost
 } from './../Action'
 import './CSS/statusFeed.css';
+import ReactCSSTransitionGroup from 'react-transition-group';
 
 class StatusFeed extends Component {
     constructor(props) {
@@ -24,25 +26,30 @@ class StatusFeed extends Component {
                     AllPost.posts.map((item)=> {
                         if(this.props.location=='/dashboard/LostAndFound'){
                             if(item.category=='Lost & Found'){
-                                return <li><Feed data={ item }
-                                                 dispatch={this.props.props} />
-                                        </li>
+                                return <LazyLoad height={50} offset={[50,50]} once={true} debounce={1000} scroll={true}>
+                                    <li><Feed data={ item } dispatch={this.props.props} /></li>
+                                </LazyLoad>
+
                             }
                         }
                         else if(this.props.location=='/dashboard/buzz'){
                             if(item.category=='BUZZ'){
-                                return <li><Feed data={ item }
-                                                 dispatch={this.props.props} />
-                                        </li>
+                                return <LazyLoad height={50} offset={[50,50]} once={true} debounce={1000} scroll={true}>
+                                    <li><Feed data={ item } dispatch={this.props.props} /></li>
+                                </LazyLoad>
                             }
                         }
                         else{
-                            return <li><Feed data={ item } dispatch={this.props.props} /></li>
+                            return <LazyLoad height={50} offset={[50,50]} once={true} debounce={1000} scroll={true}>
+                                <li><Feed data={ item } dispatch={this.props.props} /></li>
+                            </LazyLoad>
+
                         }
                     })
                     :<span>Loading</span>
                 }
             </div>
+
         )
     }
 }
