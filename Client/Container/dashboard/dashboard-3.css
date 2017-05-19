@@ -148,9 +148,9 @@ header{
 .imageUpload{
     opacity: -1;
     position: absolute;
-    width: 20px;
+    width: 21px;
 }
-select.form-control{
+select.form-control.activity-type{
     margin-left: 29px;
     width: 96px;
     color: darkcyan;

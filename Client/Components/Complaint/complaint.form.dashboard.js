@@ -5,17 +5,22 @@ import React, { Component } from 'react';
 import './complaint.css';
 import {
     postComplaint
-} from'./../../Action'
+} from'./../../Action';
+import Alert from './../alert.message';
+import ReactTimeout from 'react-timeout';
+
 
 class ComplaintForm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state={
             complaint: {
                 title:'',
                 description:'',
-                category:''
-            }
+                category:'',
+            },
+            valid:false,
+            message: 'Complaint Submitted Successfully.'
         }
     }
      onChangeHandler(e) {
@@ -27,19 +32,26 @@ class ComplaintForm extends Component {
     }
     onClickhandler(e) {
         e.preventDefault();
+        this.setState({valid:true});
         const asyncCall = this.props.props.props.props;
         asyncCall.dispatch(postComplaint(this.state.complaint));
         this.setState({
             complaint: {
                 title:'',
                 description:'',
-                category:''
-            }
-        })
+                category:''}
+        });
+       window.setTimeout(()=>{
+           this.setState({
+               valid:false
+           })
+       },3000);
     }
+
     render() {
         return(
             <div className="form-container">
+                {this.state.valid ?<Alert message={this.state.message} />:<span></span>}
                 <div className="form-area">
                     <form role="form">
                         <br className="brTag" ></br>
@@ -63,10 +75,10 @@ class ComplaintForm extends Component {
                             ></textarea>
                         </div>
                         <div className="form-group">
-                            <select className="form-control"
+                            <select className="form-control complaint-type"
                                     onChange={ this.onChangeHandler.bind(this) }
                                     name="category" >
-                                <option value='Hardware'>Hardware</option>
+                                <option selected="selected" value='Hardware'>Hardware</option>
                                 <option value='Software'>Software</option>
                                 <option value='Infrastructure'>Infrastructure</option>
                                 <option value='Other'>Other</option>

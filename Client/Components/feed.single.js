@@ -31,13 +31,30 @@ class Feeds extends Component {
             display:{
                 value:false,
                 type:'none'
+            },
+            likeDislike:{
+                like:{
+                    value:''
+                },
+                dislike: {
+                    value:'none'
+                }
             }
         }
     }
     componentWillMount() {
         const { opinion } = this.state;
+        const { likeDislike } = this.state;
+
         opinion.like = this.props.data.likeBy.likes.length;
         opinion.dislike = this.props.data.dislikeBy.dislikes.length;
+        this.props.data.likeBy.likes.map((item)=>{
+            if(item.email==this.props.data.postedBy.email){
+                likeDislike.like.value='none';
+                likeDislike.dislike.value='';
+                this.setState({ opinion });
+            }
+        })
 
         this.setState({ opinion });
 
@@ -51,6 +68,10 @@ class Feeds extends Component {
         }
         opinion.user=this.props.data.postedBy;
         opinion.id = this.props.data._id;
+        const { likeDislike } = this.state;
+        likeDislike.like.value='none';
+        likeDislike.dislike.value='';
+        this.setState({likeDislike});
         this.setState({ opinion });
         this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
 
@@ -58,14 +79,18 @@ class Feeds extends Component {
     }
     onDislikeHandler (e) {
         const { opinion } = this.state;
+        const { likeDislike } = this.state;
         opinion.dislike +=1 ;
         if(opinion.like >=1 ){
             opinion.like -= 1;
             opinion.choose = 'DISLIKE';
         }
+        likeDislike.like.value='';
+        likeDislike.dislike.value='none';
         opinion.user = this.props.data.postedBy;
         opinion.id = this.props.data._id;
         this.setState({ opinion });
+        this.setState({likeDislike});
         this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
     }
     onCommentChangeHandler(e){
@@ -129,18 +154,16 @@ class Feeds extends Component {
                 </div>
                 <div className="postfooter">
                     <div className="likediscom">
-                        <div className="like"
+                        <div className="like" style={{display:this.state.likeDislike.like.value}}
                              name="like"
-                             value={this.state.opinion.like}
                              onClick={this.onlikeHandler.bind(this)}>
                             <i className="fa fa-thumbs-up" aria-hidden="true">
-                            </i><span>{this.state.opinion.like}</span>
+                            </i>
                         </div>
-                        <div className="dislike" name="dislike"
-                             value={this.state.opinion.dislike}
+                        <div className="dislike" name="dislike" style={{display:this.state.likeDislike.dislike.value}}
                              onClick={ this.onDislikeHandler.bind(this) }>
                             <i className="fa fa-thumbs-down" aria-hidden="true">
-                            </i><span>{this.state.opinion.dislike}</span>
+                            </i>
                         </div>
                         <div className="comment"
                              onClick={ this.onClickCommentDisplayToggle.bind(this) }>

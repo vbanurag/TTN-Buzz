@@ -1,0 +1,26 @@
+.complaint-alert {
+    width: 52%;
+    height: 46px;
+    text-align: center;
+    background: rgba(109, 202, 93, 0.81);
+    opacity: 0.7;
+    color: darkgreen;
+    border-radius: 1em;
+    margin-left: 518px;
+}
+.alert-message{
+    height: 46px;
+    display: inline-block;
+    line-height: 42px;
+}
+.status-alert {
+    margin-top: 71px;
+    float: inherit;
+    margin-left: 724px;
+    height: 46px;
+    text-align: center;
+    background: rgba(109, 202, 93, 0.81);
+    opacity: 0.7;
+    color: darkgreen;
+    border-radius: 1em;
+}

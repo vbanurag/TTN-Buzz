@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import {
     createPost
 } from './../Action';
+import Alert from './alert.message';
+import './CSS/alert.css';
 
 class Buzz extends Component {
     constructor(props) {
@@ -20,7 +22,9 @@ class Buzz extends Component {
             file:'',
             imagePreviewUrl:'',
             err:'Invalid Field',
-            isInvalid:false
+            isInvalid:false,
+            valid: false,
+            message: 'Activity Posted Successfully.'
         }
     }
     onChangeHandler(e){
@@ -44,14 +48,19 @@ class Buzz extends Component {
     onClickHandler(e){
         e.preventDefault();
         const dispatch = this.props.props;
+        this.setState({valid:true});
         const { data } = this.state;
         if((data.status || data.imageFile )){
             if(data.category!=''){
                 dispatch.props.dispatch(createPost(this.state));
                 this.setState({
                     data:{}
-                })
-                console.log('push called')
+                });
+                window.setTimeout(()=>{
+                    this.setState({
+                        valid:false
+                    })
+                },3000);
                 window.location.reload();
             }
             else{
@@ -67,6 +76,7 @@ class Buzz extends Component {
         console.log(this.props, '-------buzz created')
         return(
             <div className="container-buzz">
+                {this.state.valid ?<Alert message={this.state.message} post={'status'}/>:<span></span>}
                 <div className="row">
                     <div className="col-md-9">
                         <div className="widget-area no-padding blank">
@@ -85,22 +95,24 @@ class Buzz extends Component {
                                                    value= {data.video}
                                                    onChange={ this.onChangeHandler.bind(this) }
                                                    accept="video/*"/>
-                                            <i className="fa fa-video-camera">
-                                            </i></li>
-                                        <li><input type="file"
+                                            <span><i className="fa fa-video-camera">
+                                            </i></span>
+                                            </li>
+                                        <li>
+                                            <input type="file"
                                                    className="imageUpload"
                                                    name="image"
                                                    value={data.image}
                                                    onChange={ this.onChangeHandler.bind(this) }
                                                    accept="image/*"/>
-                                            <i className="fa fa-picture-o">
-                                            </i></li>
+                                            <span><i className="fa fa-picture-o"></i></span>
+                                            </li>
                                         <li>
-                                            <select className="form-control"
+                                            <select className="form-control activity-type"
                                                     onChange={this.onChangeHandler.bind(this)}
                                                     name="category"
                                             >
-                                                <option value='Buzz'>Buzz</option>
+                                                <option selected="selected" value='Buzz'>Buzz</option>
                                                 <option value='Lost & Found'>Lost & Found</option>
                                             </select>
                                         </li>
