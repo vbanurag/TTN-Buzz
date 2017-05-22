@@ -17,3 +17,8 @@ exports.postComplaint = (req,res,next) => {
 exports.getComplaints = (req,res,next) => {
     complaintService.getComplaints(req.user,res);
 }
+
+exports.updateStatus = (req,res,next) => {
+    console.log('in controller-----------',req.body);
+    complaintService.updateStatus(req.body,res);
+}

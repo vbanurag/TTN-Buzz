@@ -16,7 +16,8 @@ class ShowComplaint extends Component {
         asyncCallForComplaints.dispatch(getComplaint());
     }
     render() {
-        console.log(this.props,'-----view compaints')
+        console.log(this.props,'-----view compaints');
+        const user = this.props.props.props.props.userReducer.users;
         const complaints = this.props.props.props.props.complaintReducer.complaint;
         return(
             <div className="tableComplaint">
@@ -33,7 +34,7 @@ class ShowComplaint extends Component {
                     <tbody>
                     {complaints.length>0?
                         complaints.map((item,index) => (
-                            <PrintTable key={index} data={item} sNo = {index} />
+                            <PrintTable key={index} data={item} sNo = {index} user={user}/>
                         )):<td></td>
                     }
 

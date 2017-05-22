@@ -66,7 +66,7 @@ class ComplaintForm extends Component {
                                    required/>
                         </div>
                         <div className="form-group">
-                            <textarea className="form-control"
+                            <textarea className="form-control text-description"
                                       type="textarea"
                                       placeholder="Description"
                                       value={ this.state.complaint.description }

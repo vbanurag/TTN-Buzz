@@ -10,6 +10,7 @@ import FeedContainer from './../../Components/statusfeed';
 import ComplaintContainer from './../../Components/Complaint/complaint.dashboard';
 import ShowComplaint from './../../Components/Complaint/complaint.show.dashboard';
 import Profile from './../../Components/profile/profile.dashboard';
+import ComplaintResolve from './../../Components/Complaint/complaint.resolve';
 import {
     Link
 } from 'react-router-dom';
@@ -32,7 +33,7 @@ class Dashboard extends Component {
                         display-table-cell v-align box"
                              id="navigation">
                             <ProfileCard props = {this.props.props} />
-                            <SidebarMenu props = {this.props.props} />
+                            <SidebarMenu props = {this.props.props} locate={ this.props } />
                         </div>
                         <Header props = {this.props.props} />
                         {
@@ -71,6 +72,16 @@ class Dashboard extends Component {
                         {
                             this.props.match.path == '/dashboard/profile/user/:email'?
                                 <Profile props={this.props}/>
+                                : <Link to="/"/>
+                        }
+                        {
+                            this.props.location.pathname == '/dashboard/resolve_complaint'?
+                                <ShowComplaint props={this.props} />
+                                : <Link to="/"/>
+                        }
+                        {
+                            this.props.match.path == '/dashboard/resolve_complaint/:id'?
+                                <ComplaintResolve props={ this.props }/>
                                 : <Link to="/"/>
                         }
                     </div>

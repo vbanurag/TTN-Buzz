@@ -8,10 +8,14 @@ module.exports =(app) => {
     app.post('/api/complaint',
         checkLoginMiddleware.isLoggedIn,
         complaintController.postComplaint
-    )
+    );
     app.get('/api/complaint',
         checkLoginMiddleware.isLoggedIn,
         complaintController.getComplaints
 
+    );
+    app.put('/api/complaint',
+        checkLoginMiddleware.isLoggedIn,
+        complaintController.updateStatus
     )
 }

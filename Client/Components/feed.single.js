@@ -61,10 +61,12 @@ class Feeds extends Component {
     }
     onlikeHandler (e) {
         const { opinion } = this.state;
-        opinion.like +=1;
         if(opinion.dislike >=1 ){
             opinion.dislike -= 1;
+            opinion.like +=1;
             opinion.choose = 'LIKE';
+        }else{
+            opinion.like += 1;
         }
         opinion.user=this.props.data.postedBy;
         opinion.id = this.props.data._id;
@@ -80,10 +82,12 @@ class Feeds extends Component {
     onDislikeHandler (e) {
         const { opinion } = this.state;
         const { likeDislike } = this.state;
-        opinion.dislike +=1 ;
         if(opinion.like >=1 ){
             opinion.like -= 1;
+            opinion.dislike +=1;
             opinion.choose = 'DISLIKE';
+        }else{
+            opinion.dislike +=1;
         }
         likeDislike.like.value='';
         likeDislike.dislike.value='none';

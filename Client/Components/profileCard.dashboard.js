@@ -26,14 +26,14 @@ class  ProfileCard extends Component {
                                 <div className="title">
                                     <Link to={`/dashboard/profile/${user.email}`}>{user.displayName }</Link>
                                 </div>
-                                <div className="desc">Passionate designer</div>
+                                <div className="desc">Devloper</div>
                             </div>
                             <div className="bottom">
                                 <a className="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/vbanurag">
                                     <i className="fa fa-twitter"></i>
                                 </a>
                                 <a className="btn btn-danger btn-sm" rel="publisher"
-                                   href="">
+                                   href="#">
                                     <i className="fa fa-google-plus"></i>
                                 </a>
                             </div>

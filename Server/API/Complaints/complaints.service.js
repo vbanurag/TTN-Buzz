@@ -24,5 +24,26 @@ exports.getComplaints = (user,res) => {
             }else{
                 res.send(complaints);
             }
-        })
+        });
+}
+exports.updateStatus = (complaint, res) => {
+    Complaint.update({_id:complaint._id},{$set:{status: complaint.status}},(err,data)=> {
+        if(err){
+            res.send(err);
+        }else{
+            getComplaint(complaint._id,res);
+        }
+    })
+}
+
+const getComplaint = (id,res) => {
+    Complaint.find({_id: id})
+        .populate('complaintBy')
+        .exec((err,complaint) => {
+            if(err){
+                res.send(err);
+            }else{
+                res.send(complaint);
+            }
+        });
 }

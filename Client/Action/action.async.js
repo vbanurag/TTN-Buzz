@@ -13,7 +13,10 @@ import {
     POST_COMMENT__CREATE_ONERROR,
     POST_COMPLAINT_INIT,
     POST_COMPLAINT_ONSUCCESS,
-    POST_COMPLAINT_ONERROR
+    POST_COMPLAINT_ONERROR,
+    UPDATE_COMPLAINT_STATUS_INIT,
+    UPDATE_COMPLAINT_STATUS_ONSUCCESS,
+    UPDATE_COMPLAINT_STATUS_ONERROR
 } from './action';
 import fetch from 'isomorphic-fetch';
 
@@ -154,6 +157,27 @@ export const getComplaint = () => {
                 dispatch(POST_COMPLAINT_ONERROR(err))
             })
     }
+}
+export const updateComplaintStatus = ( complaint ) => {
+    return (dispatch) => {
+        dispatch(UPDATE_COMPLAINT_STATUS_INIT);
+        fetch('http://localhost:4500/api/complaint',{
+            credentials: 'include',
+            method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(complaint)
+        })
+            .then( response => response.json() )
+            .then( complaint => {
+                dispatch(UPDATE_COMPLAINT_STATUS_ONSUCCESS(complaint));
+            })
+            .catch((err) => {
+                dispatch(UPDATE_COMPLAINT_STATUS_ONERROR(err));
+            });
+    };
 }
 
 

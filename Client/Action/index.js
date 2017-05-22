@@ -5,6 +5,7 @@ export {
     updateLikeDislike,
     postComment,
     postComplaint,
-    getComplaint
+    getComplaint,
+    updateComplaintStatus
 }
 from './action.async';

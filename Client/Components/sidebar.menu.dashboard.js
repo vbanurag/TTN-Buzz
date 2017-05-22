@@ -13,6 +13,8 @@ class SideBarNavigation extends Component {
         super(props)
     }
     render() {
+        const user = this.props.props.props.userReducer.users;
+        console.log(this.props,'---------sidebar nav',user)
         return(
             <div className="navi">
                 <ul>
@@ -41,6 +43,17 @@ class SideBarNavigation extends Component {
                         </i><span className="hidden-xs hidden-sm">
                          View Complaint
                     </span></Link></li>
+                    <li>
+                        {
+                            user.role=='User'?
+                                <Link to="/dashboard/resolve_complaint">
+                                    <i className="fa fa-th-list" aria-hidden="true">
+                                    </i><span className="hidden-xs hidden-sm">
+                                    Resolve Complaint</span>
+                                </Link>
+                                :<span></span>
+                        }
+                    </li>
                 </ul>
             </div>
         )

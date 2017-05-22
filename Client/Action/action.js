@@ -10,7 +10,10 @@ import {
     POST_COMMENT_ERROR,
     POST_COMPLAINT_START,
     POST_COMPLAINT_SUCCESS,
-    POST_COMPLAINT_ERROR
+    POST_COMPLAINT_ERROR,
+    UPDATE_COMPLAINT_STATUS_START,
+    UPDATE_COMPLAINT_STATUS_SUCCESS,
+    UPDATE_COMPLAINT_STATUS_ERROR
 } from './../Config/config.constants'
 
 export function FETCH_USER_START() {
@@ -51,7 +54,7 @@ export const POST_COMMENT__CREATE_ONERROR = (err) => {
 }
 
 export const POST_COMPLAINT_INIT =() => {
-    return{ type: POST_COMPLAINT_START }
+    return{ type: POST_COMPLAINT_START };
 }
 
 export const POST_COMPLAINT_ONSUCCESS =(complaint) => {
@@ -59,5 +62,17 @@ export const POST_COMPLAINT_ONSUCCESS =(complaint) => {
 }
 
 export const POST_COMPLAINT_ONERROR = (err) => {
-    return{ type: POST_COMPLAINT_ERROR, err}
+    return{ type: POST_COMPLAINT_ERROR, err};
 }
+
+export const UPDATE_COMPLAINT_STATUS_INIT =() => {
+    return { type: UPDATE_COMPLAINT_STATUS_START };
+}
+
+export const UPDATE_COMPLAINT_STATUS_ONSUCCESS =(complaint) => {
+    return { type: UPDATE_COMPLAINT_STATUS_SUCCESS , complaint };
+}
+export const UPDATE_COMPLAINT_STATUS_ONERROR =(err) => {
+    return { type: UPDATE_COMPLAINT_STATUS_ERROR, err };
+}
+
