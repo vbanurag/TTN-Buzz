@@ -19,11 +19,18 @@ import {
     UPDATE_COMPLAINT_STATUS_ONERROR
 } from './action';
 import fetch from 'isomorphic-fetch';
+import {
+    fetchUserUrl,
+    postCommentUrl,
+    complaintUrl,
+    updateLikeDislikePostUrl,
+    postUrl
+} from './../Constants/url.constants';
 
 export function fetchUser() {
     return (dispatch) => {
         dispatch(FETCH_USER_START());
-        fetch('http://localhost:4500/api/user',{
+        fetch(fetchUserUrl,{
             credentials: 'include',
         })
             .then(response => response.json())
@@ -39,7 +46,7 @@ export const createPost = (data) => {
     console.log(data,'----------dispatch method')
     return(dispatch) => {
         dispatch(POST_CREATE_INIT());
-        fetch('http://localhost:4500/api/posts',{
+        fetch(postUrl,{
             credentials: 'include',
             method: 'post',
             headers: {
@@ -64,7 +71,7 @@ export const createPost = (data) => {
 export const fetchPost = () => {
     return(dispatch) => {
         dispatch(POST_CREATE_INIT());
-        fetch('http://localhost:4500/api/posts',{
+        fetch(postUrl,{
             credentials: 'include',
         })
             .then(response => response.json())
@@ -80,7 +87,7 @@ export const updateLikeDislike = ( opinion ) => {
     console.log('data in api call -----',opinion);
     return(dispatch) => {
         dispatch(UPDATE_LIKEDISLIKE_START());
-        fetch('http://localhost:4500/api/posts/like_dislike',{
+        fetch(updateLikeDislikePostUrl,{
             credentials: 'include',
             method: 'put',
             headers: {
@@ -102,7 +109,7 @@ export const postComment = ( commentData ) => {
     console.log('postComment,----------',commentData)
     return(dispatch) => {
         dispatch(POST_COMMENT_CREATE_INIT());
-        fetch('http://localhost:4500/api/comment',{
+        fetch(postCommentUrl,{
             credentials: 'include',
             method: 'put',
             headers: {
@@ -124,7 +131,7 @@ export const postComment = ( commentData ) => {
 export const postComplaint = (complain) => {
     return (dispatch) => {
         dispatch(POST_COMPLAINT_INIT);
-        fetch('http://localhost:4500/api/complaint',{
+        fetch(complaintUrl,{
             credentials: 'include',
             method: 'post',
             headers: {
@@ -145,7 +152,7 @@ export const postComplaint = (complain) => {
 export const getComplaint = () => {
     return (dispatch) => {
         dispatch(POST_COMPLAINT_INIT);
-        fetch('http://localhost:4500/api/complaint',{
+        fetch(complaintUrl,{
             credentials: 'include',
             method:'GET'
         })
@@ -161,7 +168,7 @@ export const getComplaint = () => {
 export const updateComplaintStatus = ( complaint ) => {
     return (dispatch) => {
         dispatch(UPDATE_COMPLAINT_STATUS_INIT);
-        fetch('http://localhost:4500/api/complaint',{
+        fetch(complaintUrl,{
             credentials: 'include',
             method: 'put',
             headers: {

@@ -25,6 +25,7 @@ export const postReducer = (state=intialStatePost,action) => {
             }
         }
         case POST_CREATED_SUCCESS: {
+            console.log('----------post created success------',action.posts);
             const posts = action.posts;
             return {
                 ...state,

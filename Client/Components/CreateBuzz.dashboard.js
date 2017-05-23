@@ -24,14 +24,19 @@ class Buzz extends Component {
             err:'Invalid Field',
             isInvalid:false,
             valid: false,
-            message: 'Activity Posted Successfully.'
+            message: 'Activity Posted Successfully.',
+            action:'disabled'
         }
     }
     onChangeHandler(e){
         this.setState({ isInvalid:false });
         const { data } = this.state;
         data[e.target.name] = e.target.value;
-        console.log('----stattus ....',data)
+        console.log('----stattus ....',data);
+        if((data.status && data.category)){
+            console.log('handler calll----------------')
+            this.setState({action:''})
+        }
 
         let reader = new FileReader();
         let file = e.target.files[0];
@@ -41,7 +46,6 @@ class Buzz extends Component {
                 imagePreviewUrl: reader.result
             });
         }
-
         reader.readAsDataURL(file);
         this.setState({data});
     }
@@ -54,7 +58,8 @@ class Buzz extends Component {
             if(data.category!=''){
                 dispatch.props.dispatch(createPost(this.state));
                 this.setState({
-                    data:{}
+                    data:{},
+                    action:'disabled'
                 });
                 window.setTimeout(()=>{
                     this.setState({
@@ -119,7 +124,7 @@ class Buzz extends Component {
                                     </ul>
                                     {this.state.isInvalid?<span>{this.state.err}</span>:<span></span>}
                                     <button
-                                        className="statusButton btn btn-success green"
+                                        className={`statusButton btn btn-success green ${this.state.action}`}
                                         onClick={ this.onClickHandler.bind(this)}
                                     >
                                         <i className="fa fa-share"></i>

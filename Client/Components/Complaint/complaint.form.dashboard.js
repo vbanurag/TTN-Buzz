@@ -20,12 +20,16 @@ class ComplaintForm extends Component {
                 category:'',
             },
             valid:false,
-            message: 'Complaint Submitted Successfully.'
+            message: 'Complaint Submitted Successfully.',
+            action: 'disabled'
         }
     }
      onChangeHandler(e) {
         const { complaint } = this.state;
         complaint[e.target.name] = e.target.value;
+        if((complaint.category && complaint.description)&&(complaint.title)){
+            this.setState({action:''});
+        }
         this.setState({complaint});
         console.log(this.state.complaint,'----------in complaint ')
 
@@ -39,7 +43,8 @@ class ComplaintForm extends Component {
             complaint: {
                 title:'',
                 description:'',
-                category:''}
+                category:''},
+            action:'disabled'
         });
        window.setTimeout(()=>{
            this.setState({
@@ -86,7 +91,7 @@ class ComplaintForm extends Component {
                         </div>
                         <button
                             onClick={ this.onClickhandler.bind(this) }
-                            className="btn btn-danger pull-right">Submit Form</button>
+                            className={`btn btn-danger pull-right ${this.state.action}`}>Submit Form</button>
                     </form>
                 </div>
             </div>

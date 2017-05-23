@@ -117,3 +117,8 @@ form{
     margin-bottom: 37px;
     width: 56px;
 }
+.like-display{
+    font-size: 12px;
+    color: grey;
+    margin-right: 8px;
+}

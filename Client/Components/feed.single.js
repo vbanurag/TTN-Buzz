@@ -2,7 +2,7 @@
  * Created by anurag on 9/5/17.
  */
 import React, { Component } from 'react';
-
+import { parseTime } from './../Config/config.parseTime';
 import './CSS/commentList.css';
 import {
     Link
@@ -136,7 +136,7 @@ class Feeds extends Component {
                             </span>
                         </Link>
                         <div className="userDetails">
-                            <span className="email">{`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`}</span>
+                            <span className="email">{parseTime(item.createdAt)}</span>
                         </div>
                     </div>
                     <div className="status">
@@ -158,15 +158,22 @@ class Feeds extends Component {
                 </div>
                 <div className="postfooter">
                     <div className="likediscom">
+                        {
+                            this.state.opinion.like>0
+                                ?<span className="like-display">
+                                    {this.state.opinion.like} Like</span>
+                                :<span></span>
+                        }
+
                         <div className="like" style={{display:this.state.likeDislike.like.value}}
                              name="like"
                              onClick={this.onlikeHandler.bind(this)}>
-                            <i className="fa fa-thumbs-up" aria-hidden="true">
+                            <i className="fa fa-thumbs-o-up" aria-hidden="true">
                             </i>
                         </div>
                         <div className="dislike" name="dislike" style={{display:this.state.likeDislike.dislike.value}}
                              onClick={ this.onDislikeHandler.bind(this) }>
-                            <i className="fa fa-thumbs-down" aria-hidden="true">
+                            <i className="fa fa-thumbs-up" aria-hidden="true">
                             </i>
                         </div>
                         <div className="comment"

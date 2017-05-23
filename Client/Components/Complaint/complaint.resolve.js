@@ -51,7 +51,7 @@ class ComplaintResolve extends Component{
     }
 
     render(){
-        console.log(this.props,'-------------complaint')
+        const user = this.props.props.props.props.userReducer.users;
         const { complaint } = this.state;
         return(
             <div className="container-complaintResolve">
@@ -87,24 +87,28 @@ class ComplaintResolve extends Component{
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <div className="complaint-action">
-                                            <form>
-                                                <div className="form-group complaint-action-form">
-                                                    <select className="form-control action-select"
-                                                            name="action"
-                                                            onChange={ this.onChangeHandler.bind(this) }
-                                                    >
-                                                        <option value='Resolved'>Resolved</option>
-                                                        <option value="InProgress">InProgress</option>
-                                                    </select>
-                                                    <button
-                                                        className={`btn btn-info ${this.state.action.value}`}
-                                                        onClick={ this.onClickHandler.bind(this) }
-                                                    >
-                                                        TakeAction</button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        {
+                                            user.role=='Admin'?
+                                                <div className="complaint-action">
+                                                    <form>
+                                                        <div className="form-group complaint-action-form">
+                                                            <select className="form-control action-select"
+                                                                    name="action"
+                                                                    onChange={ this.onChangeHandler.bind(this) }
+                                                            >
+                                                                <option value='Resolved'>Resolved</option>
+                                                                <option value="InProgress">InProgress</option>
+                                                            </select>
+                                                            <button
+                                                                className={`btn btn-info ${this.state.action.value}`}
+                                                                onClick={ this.onClickHandler.bind(this) }
+                                                            >
+                                                                TakeAction</button>
+                                                        </div>
+                                                    </form>
+                                                </div>:
+                                                <span></span>
+                                        }
                                     </div>
                             </div>
                         </div>

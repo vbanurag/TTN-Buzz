@@ -49,6 +49,16 @@ module.exports= (app)=>{
             successRedirect : 'http://anuragsharma.com:9000/dashboard',
             failureRedirect : 'http://anuragsharma.com:9000/'
         }));
+  /* app.get('/auth/google',
+       passport.authenticate('google', { failureRedirect: "/" }), function (req, res) {
+           if (req.user || req.session.user){
+               console.log('------------',req.user);
+               res.redirect('http://anuragsharma.com:9000/dashboard');
+               //return res.redirect('/' + req.user._id || req.session.user._id);
+           }
+           //return res.redirect('/login');
+       }
+   )*/
 
     PostsRoute(app);
     commentRoute(app);

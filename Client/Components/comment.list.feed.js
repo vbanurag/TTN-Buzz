@@ -2,6 +2,7 @@
  * Created by anurag on 17/5/17.
  */
 import React, { Component } from 'react';
+import { parseTime } from './../Config/config.parseTime';
 import './CSS/commentList.css';
 
 class CommentDisplay extends Component {
@@ -19,7 +20,7 @@ class CommentDisplay extends Component {
                         <div className="comment-body">
                             <div className="comment-heading">
                                 <h4 className="user">{this.props.user.displayName}</h4>
-                                <h5 className="time">5 minutes ago</h5>
+                                <h5 className="time">{parseTime(this.props.comment.createdAt)}</h5>
                             </div>
                             <p>{this.props.comment.comment}</p>
                         </div>
