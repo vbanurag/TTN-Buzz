@@ -12,12 +12,14 @@ exports.createUser = (profile,done) => {
         }
         User.find({}).exec( (err,collection) => {
             if(collection.length==0){
-                User.create(user)
-                User.findOne({'email':user.email},(err, data) => {
-                    return done(null,data);
-                })
+                User.create(user,(err,data)=>{
+                    if(data){
+                        User.findOne({'email':user.email},(err, data) => {
+                            return done(null,data);
+                        })
+                    }
+                });
             }else{
-
                 User.findOne({'email': profile.emails[0].value}, (err,data) => {
                     if(err){
                         return done(err);
@@ -26,11 +28,11 @@ exports.createUser = (profile,done) => {
                             return done(null,data);
                         }else{
                             User.create(user,(err, data) => {
-                                console.log(data)
-                            })
-                            User.findOne({'email':user.email},(err, data) => {
-                                return done(null,data);
-                            })
+                                console.log('-----inside----',data);
+                                if(data){
+                                    return done(null,data);
+                                }
+                            });
                         }
 
                     }

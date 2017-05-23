@@ -19,7 +19,7 @@ class StatusFeed extends Component {
     }
     render () {
         const AllPost = this.props.props.postReducer;
-
+        console.log(AllPost,'-----------------all post-----------')
         return(
             <div className="post-Container">
                 {AllPost.posts!=null?
@@ -33,7 +33,7 @@ class StatusFeed extends Component {
                             }
                         }
                         else if(this.props.location=='/dashboard/buzz'){
-                            if(item.category=='BUZZ'){
+                            if(item.category=='BUZZ' || item.category=='Buzz'){
                                 return <LazyLoad height={50} offset={[50,50]} once={true} debounce={1000} scroll={true}>
                                     <li><Feed data={ item } dispatch={this.props.props} /></li>
                                 </LazyLoad>

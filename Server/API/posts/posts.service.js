@@ -84,6 +84,10 @@ const updatedPost = (id,res) => {
         .populate('likeBy.likes')
         .populate('dislikeBy.dislikes')
         .populate('comments')
+        .populate({
+            path: 'comments.commentedBy',
+            model: 'Comment'
+        })
         .exec( (err,post )=> {
             if(err){
                 res.send(err);
@@ -101,7 +105,16 @@ const fetchAllPost = (res) => {
         .populate('postedBy')
         .populate('likeBy.likes')
         .populate('dislikeBy.dislikes')
-        .populate('comments')
+        .populate({
+            path:'comments',
+            populate:{
+                path: 'commentedBy',
+            }
+        })
+        /*.populate({
+            path: 'comments.commentedBy',
+            model: 'Comment'
+        })*/
         .exec((err,allPost)=> {
         if(err){
             res.send(err);

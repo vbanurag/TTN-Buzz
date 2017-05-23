@@ -45,11 +45,10 @@ class Feeds extends Component {
     componentWillMount() {
         const { opinion } = this.state;
         const { likeDislike } = this.state;
-
         opinion.like = this.props.data.likeBy.likes.length;
         opinion.dislike = this.props.data.dislikeBy.dislikes.length;
         this.props.data.likeBy.likes.map((item)=>{
-            if(item.email==this.props.data.postedBy.email){
+            if(item.email==this.props.dispatch.userReducer.users.email){
                 likeDislike.like.value='none';
                 likeDislike.dislike.value='';
                 this.setState({ opinion });
@@ -67,8 +66,9 @@ class Feeds extends Component {
             opinion.choose = 'LIKE';
         }else{
             opinion.like += 1;
+            opinion.choose = 'LIKE';
         }
-        opinion.user=this.props.data.postedBy;
+        opinion.user=this.props.dispatch.userReducer.users;
         opinion.id = this.props.data._id;
         const { likeDislike } = this.state;
         likeDislike.like.value='none';
@@ -88,10 +88,11 @@ class Feeds extends Component {
             opinion.choose = 'DISLIKE';
         }else{
             opinion.dislike +=1;
+            opinion.choose = 'DISLIKE';
         }
         likeDislike.like.value='';
         likeDislike.dislike.value='none';
-        opinion.user = this.props.data.postedBy;
+        opinion.user = this.props.dispatch.userReducer.users;
         opinion.id = this.props.data._id;
         this.setState({ opinion });
         this.setState({likeDislike});
@@ -122,6 +123,7 @@ class Feeds extends Component {
     }
 
     render() {
+        console.log('--------single feed ------',this.props)
         const item = this.props.data;
         const user = Object.assign({},item.postedBy);
         const date = new Date(item.createdAt);
