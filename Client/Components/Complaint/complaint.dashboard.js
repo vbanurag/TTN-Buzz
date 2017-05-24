@@ -4,14 +4,9 @@
 import React, { Component } from 'react';
 import ComplaintForm from './complaint.form.dashboard';
 
-class Complaint extends Component {
-    constructor(props){
-        super(props)
-    }
-    render() {
-        return(
-            <ComplaintForm props={this.props.props} />
-        )
-    }
+const Complaint = (props) => {
+    return(
+        <ComplaintForm props={props.props} />
+    )
 }
 export default Complaint;

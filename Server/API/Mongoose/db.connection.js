@@ -1,9 +1,10 @@
 /**
  * Created by anurag on 5/5/17.
  */
-let Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
+const MongoURI = require('./../../Config/cloud.upload.constants');
 
-Mongoose.connect('mongodb://localhost:27017/TTNBuzz');
+Mongoose.connect(MongoURI.mongoDbURL);
 
 (()=>{
     Mongoose.connection.on('open',(err,data)=>{
