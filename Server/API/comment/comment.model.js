@@ -16,7 +16,7 @@ const CommentSchema = new Mongoose.Schema({
         ref:'Post'
     }
 
-},{ versionKey: false, timestamps: true});
+},{ versionKey: false, timestamps: true });
 
 CommentSchema.set('autoIndex', false);
 CommentSchema.index({comment: 'text'});

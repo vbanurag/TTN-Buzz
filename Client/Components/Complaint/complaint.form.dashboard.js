@@ -24,7 +24,7 @@ class ComplaintForm extends Component {
             action: 'disabled'
         }
     }
-     onChangeHandler(e) {
+     onChangeHandler = (e) => {
         const { complaint } = this.state;
         complaint[e.target.name] = e.target.value;
         if((complaint.category && complaint.description)&&(complaint.title)){
@@ -34,7 +34,7 @@ class ComplaintForm extends Component {
         console.log(this.state.complaint,'----------in complaint ')
 
     }
-    onClickhandler(e) {
+    onClickhandler = (e) => {
         e.preventDefault();
         this.setState({valid:true});
         const asyncCall = this.props.props.props.props;
@@ -67,7 +67,7 @@ class ComplaintForm extends Component {
                                    id="name" name="title"
                                    placeholder="Title"
                                    value={ this.state.complaint.title }
-                                   onChange={ this.onChangeHandler.bind(this) }
+                                   onChange={ this.onChangeHandler }
                                    required/>
                         </div>
                         <div className="form-group">
@@ -75,13 +75,13 @@ class ComplaintForm extends Component {
                                       type="textarea"
                                       placeholder="Description"
                                       value={ this.state.complaint.description }
-                                      onChange={ this.onChangeHandler.bind(this) }
+                                      onChange={ this.onChangeHandler }
                                       name="description"
                             ></textarea>
                         </div>
                         <div className="form-group">
                             <select className="form-control complaint-type"
-                                    onChange={ this.onChangeHandler.bind(this) }
+                                    onChange={ this.onChangeHandler }
                                     name="category" >
                                 <option selected="selected" value='Hardware'>Hardware</option>
                                 <option value='Software'>Software</option>
@@ -90,7 +90,7 @@ class ComplaintForm extends Component {
                             </select>
                         </div>
                         <button
-                            onClick={ this.onClickhandler.bind(this) }
+                            onClick={ this.onClickhandler }
                             className={`btn btn-danger pull-right ${this.state.action}`}>Submit Form</button>
                     </form>
                 </div>

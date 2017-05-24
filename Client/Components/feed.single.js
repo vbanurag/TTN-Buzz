@@ -110,7 +110,7 @@ class Feeds extends Component {
         this.props.dispatch.dispatch(postComment(this.state.commentPost));
         this.setState({commentPost: {comment:'', postId:''}});
     }
-    onClickCommentDisplayToggle(e){
+    onClickCommentDisplayToggle = () => {
         const { display } = this.state;
         if(display.value){
             display.value=false;
@@ -179,7 +179,7 @@ class Feeds extends Component {
                             </i>
                         </div>
                         <div className="comment"
-                             onClick={ this.onClickCommentDisplayToggle.bind(this) }>
+                             onClick={ this.onClickCommentDisplayToggle }>
                             <i className="fa fa-comment-o" aria-hidden="true">
                             </i><span></span></div>
                     </div>

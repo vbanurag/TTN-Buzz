@@ -14,6 +14,6 @@ const userSchema = new Mongoose.Schema({
         type: String, enum: ['admin', 'User'],
         default: 'User'
     }
-},{strict: false,versionKey: false, timestamps: true});
+},{strict: false,versionKey: false, timestamps: true });
 
 module.exports= Mongoose.model('User',userSchema);

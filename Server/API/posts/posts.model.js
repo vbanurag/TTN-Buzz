@@ -30,7 +30,7 @@ const PostSchema = new Mongoose.Schema({
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }]
-},{ versionKey: false, timestamps: true});
+},{ versionKey: false, timestamps: true  });
 
 PostSchema.set('autoIndex', false);
 PostSchema.index({postedBy: 1, sparse: true});

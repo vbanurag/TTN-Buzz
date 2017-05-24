@@ -34,7 +34,7 @@ class ComplaintResolve extends Component{
         complaint=targetComplaint;
         this.setState({ complaint,action });
     }
-    onChangeHandler(e){
+    onChangeHandler = (e) => {
         const { action,complaint } = this.state;
         action[e.target.name] = e.target.value;
         if(action.action){
@@ -44,7 +44,7 @@ class ComplaintResolve extends Component{
         }
         console.log(this.state)
     }
-    onClickHandler(e){
+    onClickHandler = (e) => {
         e.preventDefault();
         const { action } = this.state;
         console.log(this.state,'------------resolved');
@@ -97,14 +97,14 @@ class ComplaintResolve extends Component{
                                                         <div className="form-group complaint-action-form">
                                                             <select className="form-control action-select"
                                                                     name="action"
-                                                                    onChange={ this.onChangeHandler.bind(this) }
+                                                                    onChange={ this.onChangeHandler }
                                                             >
                                                                 <option value='Resolved'>Resolved</option>
                                                                 <option value="InProgress">InProgress</option>
                                                             </select>
                                                             <button
                                                                 className={`btn btn-info ${this.state.action.value}`}
-                                                                onClick={ this.onClickHandler.bind(this) }
+                                                                onClick={ this.onClickHandler }
                                                             >
                                                                 TakeAction</button>
                                                         </div>

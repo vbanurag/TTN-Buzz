@@ -28,7 +28,7 @@ class Buzz extends Component {
             action:'disabled'
         }
     }
-    onChangeHandler(e){
+    onChangeHandler = (e) => {
         this.setState({ isInvalid:false });
         const { data } = this.state;
         data[e.target.name] = e.target.value;
@@ -49,7 +49,7 @@ class Buzz extends Component {
         reader.readAsDataURL(file);
         this.setState({data});
     }
-    onClickHandler(e){
+    onClickHandler = (e) =>{
         e.preventDefault();
         const dispatch = this.props.props;
         this.setState({valid:true});
@@ -91,14 +91,14 @@ class Buzz extends Component {
                                               placeholder="Create your Buzz"
                                               name="status"
                                               value= {this.state.data.status}
-                                              onChange={ this.onChangeHandler.bind(this) }
+                                              onChange={ this.onChangeHandler }
                                     ></textarea>
                                     <ul>
                                         <li><input type="file"
                                                    className="videoUpload"
                                                    name="video"
                                                    value= {data.video}
-                                                   onChange={ this.onChangeHandler.bind(this) }
+                                                   onChange={ this.onChangeHandler }
                                                    accept="video/*"/>
                                             <span><i className="fa fa-video-camera">
                                             </i></span>
@@ -108,13 +108,13 @@ class Buzz extends Component {
                                                    className="imageUpload"
                                                    name="image"
                                                    value={data.image}
-                                                   onChange={ this.onChangeHandler.bind(this) }
+                                                   onChange={ this.onChangeHandler }
                                                    accept="image/*"/>
                                             <span><i className="fa fa-picture-o"></i></span>
                                             </li>
                                         <li>
                                             <select className="form-control activity-type"
-                                                    onChange={this.onChangeHandler.bind(this)}
+                                                    onChange={this.onChangeHandler }
                                                     name="category"
                                             >
                                                 <option selected="selected" value='Buzz'>Buzz</option>
@@ -125,7 +125,7 @@ class Buzz extends Component {
                                     {this.state.isInvalid?<span>{this.state.err}</span>:<span></span>}
                                     <button
                                         className={`statusButton btn btn-success green ${this.state.action}`}
-                                        onClick={ this.onClickHandler.bind(this)}
+                                        onClick={ this.onClickHandler }
                                     >
                                         <i className="fa fa-share"></i>
                                         Share
