@@ -2,6 +2,7 @@
  * Created by anurag on 8/5/17.
  */
 const Mongoose = require('mongoose');
+const textSearch = require('mongoose-text-search');
 
 const PostSchema = new Mongoose.Schema({
     category : {
@@ -31,8 +32,9 @@ const PostSchema = new Mongoose.Schema({
     }]
 },{ versionKey: false, timestamps: true});
 
-PostSchema.set({autoIndex: false});
+PostSchema.set('autoIndex', false);
 PostSchema.index({postedBy: 1, sparse: true});
+PostSchema.plugin(textSearch);
 PostSchema.index({content: 'text' });
 
 module.exports = Mongoose.model('Post', PostSchema);

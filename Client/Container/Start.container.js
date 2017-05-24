@@ -34,8 +34,12 @@ class StartContainer extends Component {
         this.props.props.dispatch(fetchUser());
 
     }
-
-
+    shouldComponentUpdate(nextProps, nextState) {
+        if ((nextProps.props.userReducer.users.role == 'Admin') || (nextProps.props.userReducer.users.role == 'User')) {
+            return true;
+        }
+        return false;
+    }
     render() {
         console.log(this.props,'this props---final', Array.isArray(this.props.props.userReducer.users),'------',this.props.props.userReducer.users.role  )
         const homePath = <Route exact path='/'
@@ -44,8 +48,8 @@ class StartContainer extends Component {
                                             props = { this.props }/>)}/>;
         return(
                 <div>
-                    {homePath}
-                    { !Array.isArray(this.props.props.userReducer.users)?
+                    { //!Array.isArray(this.props.props.userReducer.users)?
+                        this.props.props.userReducer.users.role=='User'?
                         <div>
                             <Route exact path='/dashboard'
                                    render={ props => (
@@ -83,10 +87,15 @@ class StartContainer extends Component {
                                    render={ props => (
                                        <Dashboard { ...props}
                                                   props = { this.props }/>)} />
+                            <Redirect from='/*' to="/dashboard"/>
                         </div>
 
                         :<div>
-
+                                <Route exact path='/*'
+                                       render={ props =>
+                                           (<Login { ...props }
+                                                   props = { this.props }/>)} />
+                                <Redirect from='/*' to="/"/>
                         </div>
                     }
 

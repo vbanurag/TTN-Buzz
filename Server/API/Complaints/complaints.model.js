@@ -29,7 +29,7 @@ const complaintSchema = new Mongoose.Schema({
     }
 },{ versionKey: false, timestamps: true});
 
-complaintSchema.set({autoIndex: false});
+complaintSchema.set('autoIndex', false);
 complaintSchema.index({category: 1, sparse: true});
 
 module.exports = Mongoose.model('Complaint', complaintSchema);

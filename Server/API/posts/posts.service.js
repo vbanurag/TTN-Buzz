@@ -83,10 +83,11 @@ const updatedPost = (id,res) => {
     Post.find({_id:id}).populate('postedBy')
         .populate('likeBy.likes')
         .populate('dislikeBy.dislikes')
-        .populate('comments')
         .populate({
-            path: 'comments.commentedBy',
-            model: 'Comment'
+            path:'comments',
+            populate:{
+                path: 'commentedBy',
+            }
         })
         .exec( (err,post )=> {
             if(err){

@@ -84,6 +84,11 @@ class Dashboard extends Component {
                                 <ComplaintResolve props={ this.props }/>
                                 : <Link to="/"/>
                         }
+                        {
+                            this.props.match.path == '/*'?
+                                <Link to="/dashboard" />
+                                : <Link to="/"/>
+                        }
                     </div>
                 </div>
             </div>

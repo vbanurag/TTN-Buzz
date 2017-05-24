@@ -18,6 +18,7 @@ const CommentSchema = new Mongoose.Schema({
 
 },{ versionKey: false, timestamps: true});
 
-CommentSchema.set({autoIndex: false});
+CommentSchema.set('autoIndex', false);
+CommentSchema.index({comment: 'text'});
 
 module.exports = Mongoose.model('Comment', CommentSchema);

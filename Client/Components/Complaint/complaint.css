@@ -103,6 +103,8 @@ textarea.text-description{
     color: #333;
     background-color: #E6E6E6;
 }
+@media only screen and (max-width: 999px) {
 
+}
 
 

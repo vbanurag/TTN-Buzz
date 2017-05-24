@@ -5,7 +5,10 @@ import React,{ Component } from 'react';
 import './complaint.css';
 import {
     updateComplaintStatus
-} from './../../Action'
+} from './../../Action';
+import {
+    parseDate
+} from './../../Config/config.parseTime';
 
 class ComplaintResolve extends Component{
     constructor(props){
@@ -75,7 +78,7 @@ class ComplaintResolve extends Component{
                                             </tr>
                                             <tr>
                                                 <td>Complaint date:</td>
-                                                <td>{ complaint.createdAt }</td>
+                                                <td>{ parseDate(complaint.createdAt) }</td>
                                             </tr>
                                             <tr>
                                                 <td>Status</td>
@@ -88,7 +91,7 @@ class ComplaintResolve extends Component{
                                             </tbody>
                                         </table>
                                         {
-                                            user.role=='Admin'?
+                                            user.role=='User'?
                                                 <div className="complaint-action">
                                                     <form>
                                                         <div className="form-group complaint-action-form">
