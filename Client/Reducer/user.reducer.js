@@ -3,7 +3,9 @@ import {
     FETCH_USER_STARTED,
     FETCH_USER_SUCCESS
 } from './../Config/config.constants'
-
+import {
+    decrypter
+} from './../Config/config.decrypt';
 
 const intialState = {
     users: [],
@@ -22,8 +24,9 @@ export const userReducer = (state = intialState, action) => {
             }
         case 'FETCH_USER_SUCCESS':
             {
-                let user = action.users;
-                console.log(user,'response user')
+                let ServerData = action.users;
+                console.log(ServerData.user,'response user');
+                const user = decrypter(ServerData.user);
                 return {
                     ...state,
                     users: user,

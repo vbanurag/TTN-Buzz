@@ -2,6 +2,7 @@
  * Created by anurag on 6/4/17.
  */
 const User = require('./user.model.js');
+const encryptDATA = require('./../../Config/secure.user.send');
 
 exports.createUser = (profile,done) => {
     if(profile._json.domain === 'tothenew.com'){
@@ -44,6 +45,7 @@ exports.createUser = (profile,done) => {
     }
 }
 exports.sendUser = (user,res) => {
-    console.log(user,'----inservice')
-    res.json(user);
+    console.log(user,'----inservice');
+    const User = encryptDATA.encryptData(user);
+    res.json({user:User.toString()});
 }
