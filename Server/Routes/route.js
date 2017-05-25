@@ -13,27 +13,15 @@ const complaintRoute = require('./../API/Complaints/complaints.route');
 
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
-        /*res.header('Access-Control-Allow-Origin', '*');
-
-        res.header("Access-Control-Allow-Headers","Origin, Accept, X-Requested-With, X-HTTP-Method-Override, Content-Type, Authorization");
-       */
-        console.log(req.originalUrl,'cors')
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header("Access-Control-Allow-Origin" , 'http://anuragsharma.com:9000')
         res.header("Access-Control-Allow-Credentials" , true );
         next();
-    }
+    };
+
     app.use(allowCrossDomain);
     app.use(session({
         secret: '3546xcsdcsd25333',
-        // resave: true,
-        // saveUninitialized: true,
-        // cookie: {
-        //     path     : '/',
-        //     domain   : 'anuragsharma.com:9000',
-        //     httpOnly : true,
-        //     maxAge   : 1000*60*60*24*30*12    //one year(ish)
-        // }
     }));
     app.use(passport.initialize());
     app.use(passport.session());
@@ -63,17 +51,13 @@ module.exports= (app)=>{
     PostsRoute(app);
     commentRoute(app);
     complaintRoute(app);
-    //app.post('/api/posts',checkLoginMiddleware.isLoggedIn,postController.createPost);
 
     app.get('/api/user' ,
         checkLoginMiddleware.isLoggedIn,
         userController.getUser
-    )
+    );
     app.get('/user/logout',(req,res) => {
         if(req.isAuthenticated()){
-            console.log('logged in user')
-            //req.logOut();
-            //res.redirect('http://anuragsharma.com:9000/');
             req.session.destroy(function(e){
                 req.logout();
                 res.redirect('http://anuragsharma.com:9000/');

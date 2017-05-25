@@ -20,20 +20,22 @@ class ComplaintResolve extends Component{
             action:{
                 value:'',
                 action:''
-            }
+            },
+            id:''
         }
     }
     componentWillMount(){
         let { complaint,action } = this.state;
         const complaints = this.props.props.props.props.complaintReducer.complaint;
         const id = this.props.props.match.params.id;
+        this.setState({id:id});
         const targetComplaint = complaints.find((item,index)=> {
             return item._id==id;
         });
         action.value='disabled';
         complaint=targetComplaint;
         this.setState({ complaint,action });
-    }
+    };
     onChangeHandler = (e) => {
         const { action,complaint } = this.state;
         action[e.target.name] = e.target.value;
@@ -43,7 +45,7 @@ class ComplaintResolve extends Component{
             this.setState({ action,complaint });
         }
         console.log(this.state)
-    }
+    };
     onClickHandler = (e) => {
         e.preventDefault();
         const { action } = this.state;
@@ -51,7 +53,7 @@ class ComplaintResolve extends Component{
         action.value='disabled';
         this.setState({ action });
         this.props.props.props.props.dispatch(updateComplaintStatus(this.state.complaint));
-    }
+    };
 
     render(){
         const user = this.props.props.props.props.userReducer.users;
@@ -91,7 +93,7 @@ class ComplaintResolve extends Component{
                                             </tbody>
                                         </table>
                                         {
-                                            (user.role=='User') && (complaint.status != 'Resolved') ?
+                                            (user.role=='User') ?
                                                 <div className="complaint-action">
                                                     <form>
                                                         <div className="form-group complaint-action-form">

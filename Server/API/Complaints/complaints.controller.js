@@ -20,5 +20,5 @@ exports.getComplaints = (req,res,next) => {
 
 exports.updateStatus = (req,res,next) => {
     console.log('in controller-----------',req.body);
-    complaintService.updateStatus(req.body,res);
+    complaintService.updateStatus(req.body,req.user.email,res);
 }
