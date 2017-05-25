@@ -91,7 +91,7 @@ class ComplaintResolve extends Component{
                                             </tbody>
                                         </table>
                                         {
-                                            user.role=='User'?
+                                            (user.role=='User') && (complaint.status != 'Resolved') ?
                                                 <div className="complaint-action">
                                                     <form>
                                                         <div className="form-group complaint-action-form">

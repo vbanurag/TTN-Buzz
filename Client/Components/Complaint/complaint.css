@@ -106,5 +106,33 @@ textarea.text-description{
 @media only screen and (max-width: 999px) {
 
 }
+/*Filter css*/
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+h3.panel-title-complaint{
+    color: chocolate;
+    font-size: 29px;
+    text-align: -webkit-center;
+}
+select.form-control.complaint-type-select{
+    color: black;
+    background-color: azure;
+}
+.td-category-Pending{
+    color: brown;
+    font-weight: 600;
+}
+.td-category-InProgress{
+    color: orangered;
+    font-weight: 600;
+}
+.td-category-Resolved{
+    color: darkgreen;
+    font-weight: 600;
+}
 
 

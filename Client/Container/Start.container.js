@@ -91,7 +91,7 @@ class StartContainer extends Component {
                         </div>
 
                         :<div>
-                                <Route exact path='/*'
+                                <Route  path='/*'
                                        render={ props =>
                                            (<Login { ...props }
                                                    props = { this.props }/>)} />

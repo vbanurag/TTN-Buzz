@@ -15,8 +15,8 @@ const PrintTable = (props) => {
                     <td><Link to={`/dashboard/resolve_complaint/${props.data._id}`} >{props.data._id}</Link></td>
                     :<td>{props.data._id}</td>
             }
-            <td>{props.data.category}</td>
-            <td>{props.data.status}</td>
+            <td >{props.data.category}</td>
+            <td className={`td-category-${props.data.status}`}>{props.data.status}</td>
             <td>{props.data.complaintBy.displayName}</td>
         </tr>
     )
