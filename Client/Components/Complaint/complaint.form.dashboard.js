@@ -77,6 +77,7 @@ class ComplaintForm extends Component {
                                       value={ this.state.complaint.description }
                                       onChange={ this.onChangeHandler }
                                       name="description"
+                                      maxlength="100"
                             ></textarea>
                         </div>
                         <div className="form-group">

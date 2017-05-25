@@ -5,6 +5,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './../Client/Container/app';
 import store from './../Client/Store/app.store';
+import './Components/CSS/responsive.bootstrap.css';
 import {
     Provider
 } from 'react-redux';

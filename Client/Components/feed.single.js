@@ -170,12 +170,12 @@ class Feeds extends Component {
                         <div className="like" style={{display:this.state.likeDislike.like.value}}
                              name="like"
                              onClick={this.onlikeHandler.bind(this)}>
-                            <i className="fa fa-thumbs-o-up" aria-hidden="true">
+                            <i className="fa fa-thumbs-o-up" title="I like this" aria-hidden="true">
                             </i>
                         </div>
                         <div className="dislike" name="dislike" style={{display:this.state.likeDislike.dislike.value}}
                              onClick={ this.onDislikeHandler.bind(this) }>
-                            <i className="fa fa-thumbs-up" aria-hidden="true">
+                            <i className="fa fa-thumbs-up" title="I dislike this" aria-hidden="true">
                             </i>
                         </div>
                         <div className="comment"
