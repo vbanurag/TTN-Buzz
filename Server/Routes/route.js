@@ -18,7 +18,6 @@ module.exports= (app)=>{
         res.header("Access-Control-Allow-Credentials" , true );
         next();
     };
-
     app.use(allowCrossDomain);
     app.use(session({
         secret: '3546xcsdcsd25333',

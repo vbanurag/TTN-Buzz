@@ -12,10 +12,9 @@ module.exports =(app) => {
     app.get('/api/complaint',
         checkLoginMiddleware.isLoggedIn,
         complaintController.getComplaints
-
     );
     app.put('/api/complaint',
         checkLoginMiddleware.isLoggedIn,
         complaintController.updateStatus
-    )
-}
+    );
+};

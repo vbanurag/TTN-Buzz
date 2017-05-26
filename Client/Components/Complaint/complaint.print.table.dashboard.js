@@ -1,7 +1,7 @@
 /**
  * Created by anurag on 12/5/17.
  */
-import React,{ Component } from 'react';
+import React from 'react';
 import {
     Link
 } from 'react-router-dom';
@@ -20,5 +20,5 @@ const PrintTable = (props) => {
             <td>{props.data.complaintBy.displayName}</td>
         </tr>
     )
-}
+};
 export default PrintTable;

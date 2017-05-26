@@ -11,6 +11,7 @@ import ComplaintContainer from './../../Components/Complaint/complaint.dashboard
 import ShowComplaint from './../../Components/Complaint/complaint.show.dashboard';
 import Profile from './../../Components/profile/profile.dashboard';
 import ComplaintResolve from './../../Components/Complaint/complaint.resolve';
+import MobileView from './../../Components/mobileView.navigation';
 import {
     Link
 } from 'react-router-dom';
@@ -22,14 +23,11 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount(){
-        console.log(window.scrollMaxY,'check width')
-    }
-
     render() {
         console.log('dashboard user----', this.props)
         return(
             <div>
+
                 <div className="container-fluid display-table">
                     <div className="row display-table-row">
                         <div className="col-md-3 col-sm-1 hidden-xs

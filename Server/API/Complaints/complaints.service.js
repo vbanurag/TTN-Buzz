@@ -13,8 +13,7 @@ exports.postComplaint = (complaintData,res) => {
             res.send(data);
         }
     })
-}
-
+};
 exports.getComplaints = (user,res) => {
     Complaint.find({complaintBy: user._id})
         .sort({createdAt: -1})
@@ -26,7 +25,7 @@ exports.getComplaints = (user,res) => {
                 res.send(complaints);
             }
         });
-}
+};
 exports.updateStatus = (complaint,mail, res) => {
     Complaint.update({_id:complaint._id},{$set:{status: complaint.status}},(err,data)=> {
         if(err){
@@ -42,7 +41,6 @@ exports.updateStatus = (complaint,mail, res) => {
         }
     })
 };
-
 const getComplaint = (id,res) => {
     Complaint.find({_id: id})
         .populate('complaintBy')
@@ -53,4 +51,16 @@ const getComplaint = (id,res) => {
                 res.send(complaint);
             }
         });
-}
+};
+exports.getAllComplaints = (res) => {
+    Complaint.find({})
+        .sort({createdAt: -1})
+        .populate('complaintBy')
+        .exec((err,complaints) => {
+            if(err){
+                res.send(err);
+            }else{
+                res.send(complaints);
+            }
+        });
+};

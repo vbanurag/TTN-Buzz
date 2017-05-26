@@ -27,16 +27,13 @@ class ShowComplaint extends Component {
         const { searchType } = this.state;
         searchType.value = e.target.value;
         this.setState({ searchType });
-        console.log(this.state,'-----------Choose value-------');
     };
-    clickHandler = (e) => {
-        e.preventDefault();
+    clickHandler = ( ) => {
         this.setState({isVisible: !this.state.isVisible});
     };
     render() {
         const user = this.props.props.props.props.userReducer.users;
         const complaints = this.props.props.props.props.complaintReducer.complaint;
-        console.log(complaints,'----------',this.props.props.props.props.complaintReducer.complaint);
         return(
             <div className="tableComplaint">
                 <div className="panel-heading">
@@ -59,7 +56,7 @@ class ShowComplaint extends Component {
                     </div>
                     {
                         this.state.isVisible == true?
-                            <ComplaintChart complaints = { complaints }  />
+                            <ComplaintChart complaints = { complaints } changeVisibilty = { this.clickHandler } />
                             :<div></div>
                     }
                 </div>

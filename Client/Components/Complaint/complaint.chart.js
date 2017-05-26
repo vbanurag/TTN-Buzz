@@ -2,7 +2,6 @@
  * Created by anurag on 26/5/17.
  */
 import React, { Component } from 'react';
-/*import BarChart from 'react-bar-chart';*/
 import { Modal,Button } from 'react-bootstrap';
 import {
     BarChart,
@@ -14,68 +13,6 @@ import {
     Legend
 } from 'recharts';
 
-/*class ComplaintChart extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            data : [
-            ],
-            margin :{
-                top: 20,
-                right: 20,
-                bottom: 30,
-                left: 40
-            },
-            ShowModal: true
-
-        };
-    }
-    componentWillMount = () => {
-        console.log(this.props.complaints,'--------------complaints');
-        const Software = this.props.complaints.filter((item) => {
-            return item.category == 'Software';
-        })
-        const Hardware = this.props.complaints.filter((item) => {
-            return item.category == 'Hardware';
-        })
-        const Infra = this.props.complaints.filter((item) => {
-            return item.category == 'Infrastructure';
-        })
-        const { data } = this.state;
-        data.push({text: 'Software', value: Software.length});
-        data.push({text: 'Hardware', value: Hardware.length});
-        data.push({text: 'Infra', value: Infra.length});
-        this.setState({data});
-    }
-    componentDidMount= () => {
-        window.onresize = () => {
-            this.setState({width: this.refs.root.offsetWidth});
-        }
-    };
-    open = () => {
-        this.setState({ShowModal: false})
-    }
-    render() {
-        return (
-            <Modal show={this.state.ShowModal }>
-                <Modal.Body>
-                    <div style={{width: '50%'}}>
-                        <BarChart ylabel='No. of Complaints'
-                                  width="500"
-                                  height={250}
-                                  margin={this.state.margin}
-                                  data={this.state.data}
-                        />
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={ this.open }>Close</Button>
-                </Modal.Footer>
-            </Modal>
-        );
-    }
-}*/
-
 class ComplaintChart extends Component {
     constructor(props){
         super(props);
@@ -86,7 +23,6 @@ class ComplaintChart extends Component {
         }
     }
     componentWillMount = () => {
-        console.log(this.props.complaints,'--------------complaints');
         const Software = this.props.complaints.filter((item) => {
             return item.category == 'Software';
         });
@@ -145,7 +81,8 @@ class ComplaintChart extends Component {
         return retVal.length;
     };
     open = () => {
-        this.setState({ShowModal: false})
+        this.props.changeVisibilty();
+        this.setState({ShowModal: false});
     };
     render(){
         return(
