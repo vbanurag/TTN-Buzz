@@ -26,18 +26,15 @@ class Buzz extends Component {
             valid: false,
             message: 'Activity Posted Successfully.',
             action:'disabled'
-        }
+        };
     }
     onChangeHandler = (e) => {
         this.setState({ isInvalid:false });
         const { data } = this.state;
         data[e.target.name] = e.target.value;
-        console.log('----stattus ....',data);
         if((data.status && data.category)){
-            console.log('handler calll----------------')
-            this.setState({action:''})
+            this.setState({action:''});
         }
-
         let reader = new FileReader();
         let file = e.target.files[0];
 
@@ -45,17 +42,17 @@ class Buzz extends Component {
             this.setState({
                 imagePreviewUrl: reader.result
             });
-        }
+        };
         reader.readAsDataURL(file);
         this.setState({data});
-    }
+    };
     onClickHandler = (e) =>{
         e.preventDefault();
         const dispatch = this.props.props;
         this.setState({valid:true});
         const { data } = this.state;
         if((data.status || data.imageFile )){
-            if(data.category!=''){
+            if(data.category!='' && data.status.length <= 240){
                 dispatch.props.dispatch(createPost(this.state));
                 this.setState({
                     data:{},
@@ -74,11 +71,11 @@ class Buzz extends Component {
         }else{
             this.setState({isInvalid:true})
         }
-    }
+    };
 
     render() {
         const { data } = this.state;
-        console.log(this.props, '-------buzz created')
+        console.log(this.props, '-------buzz created');
         return(
             <div className="container-buzz">
                 {this.state.valid ?<Alert message={this.state.message} post={'status'}/>:<span></span>}
@@ -88,13 +85,14 @@ class Buzz extends Component {
                             <div className="status-upload">
                                 <form>
                                     <textarea className="buzzShare"
-                                              placeholder="Create your Buzz"
+                                              placeholder="Create your Buzz (max 240 char)"
+                                              maxlength="240"
                                               name="status"
                                               value= {this.state.data.status}
                                               onChange={ this.onChangeHandler }
                                     ></textarea>
                                     <ul>
-                                        <li><input type="file"
+                                        <li><input type=""
                                                    className="videoUpload"
                                                    name="video"
                                                    value= {data.video}
@@ -115,9 +113,9 @@ class Buzz extends Component {
                                         <li>
                                             <select className="form-control activity-type"
                                                     onChange={this.onChangeHandler }
-                                                    name="category"
-                                            >
-                                                <option selected="selected" value='Buzz'>Buzz</option>
+                                                    name="category">
+                                                <option selected disabled>Choose Activity</option>
+                                                <option value='Buzz'>Buzz</option>
                                                 <option value='Lost & Found'>Lost & Found</option>
                                             </select>
                                         </li>
@@ -125,8 +123,7 @@ class Buzz extends Component {
                                     {this.state.isInvalid?<span>{this.state.err}</span>:<span></span>}
                                     <button
                                         className={`statusButton btn btn-success green ${this.state.action}`}
-                                        onClick={ this.onClickHandler }
-                                    >
+                                        onClick={ this.onClickHandler }>
                                         <i className="fa fa-share"></i>
                                         Share
                                     </button>

@@ -31,20 +31,19 @@ const SideBarNavigation = (props) => {
                     </i><span className="hidden-xs hidden-sm">
                         Complaint
                     </span></Link></li>
-                <li><Link to="/dashboard/viewComplaint">
-                    <i className="fa fa-list" aria-hidden="true">
-                    </i><span className="hidden-xs hidden-sm">
-                         View Complaint
-                    </span></Link></li>
                 <li>
                     {
-                        user.role=='User'?
+                        user.role=='Admin'?
                             <Link to="/dashboard/resolve_complaint">
                                 <i className="fa fa-th-list" aria-hidden="true">
                                 </i><span className="hidden-xs hidden-sm">
                                     Resolve Complaint</span>
                             </Link>
-                            :<span></span>
+                            :<Link to="/dashboard/viewComplaint">
+                                <i className="fa fa-list" aria-hidden="true">
+                                </i><span className="hidden-xs hidden-sm">
+                                View Complaint
+                            </span></Link>
                     }
                 </li>
             </ul>
