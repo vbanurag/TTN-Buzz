@@ -71,6 +71,10 @@ class StartContainer extends Component {
                                    render={ props => (
                                        <Dashboard { ...props}
                                                   props = { this.props }/>)} />
+                            <Route exact path='/dashboard/viewComplaint/showChart'
+                                   render={ props => (
+                                       <Dashboard { ...props}
+                                                  props = { this.props }/>)} />
                             <Route exact path='/dashboard/profile/:email'
                                    render={ props => (
                                        <Dashboard { ...props}

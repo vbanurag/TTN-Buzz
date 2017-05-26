@@ -22,6 +22,9 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
     }
+    componentWillMount(){
+        console.log(window.scrollMaxY,'check width')
+    }
 
     render() {
         console.log('dashboard user----', this.props)
@@ -85,7 +88,7 @@ class Dashboard extends Component {
                                 : <Link to="/"/>
                         }
                         {
-                            this.props.match.path == '/*'?
+                            this.props.match.path == '*'?
                                 <Link to="/dashboard" />
                                 : <Link to="/"/>
                         }

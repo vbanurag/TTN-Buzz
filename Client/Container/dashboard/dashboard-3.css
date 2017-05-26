@@ -117,6 +117,9 @@
 .buzzShare{
     border: 1px solid lightgreen;
 }
+.buzzShare-disabled{
+
+}
 header{
     height: 57px;
 }

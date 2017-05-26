@@ -2,6 +2,7 @@
  * Created by anurag on 7/5/17.
  */
 import React, { Component } from 'react';
+import Popup from 'react-popup';
 import {
     createPost
 } from './../Action';
@@ -25,15 +26,21 @@ class Buzz extends Component {
             isInvalid:false,
             valid: false,
             message: 'Activity Posted Successfully.',
-            action:'disabled'
+            action:'disabled',
         };
     }
     onChangeHandler = (e) => {
         this.setState({ isInvalid:false });
         const { data } = this.state;
         data[e.target.name] = e.target.value;
-        if((data.status && data.category)){
-            this.setState({action:''});
+        console.log('--------------data length --------',data.status.length)
+        if(data.status.length>=240){
+            console.log('--------------data length inside --------',data.status.length)
+             e.target.style.borderColor = 'red';
+            this.setState({action:'disabled'});
+            if((data.status.length<=240 && data.category)){
+                this.setState({action:''});
+            }
         }
         let reader = new FileReader();
         let file = e.target.files[0];
@@ -86,7 +93,6 @@ class Buzz extends Component {
                                 <form>
                                     <textarea className="buzzShare"
                                               placeholder="Create your Buzz (max 240 char)"
-                                              maxlength="240"
                                               name="status"
                                               value= {this.state.data.status}
                                               onChange={ this.onChangeHandler }

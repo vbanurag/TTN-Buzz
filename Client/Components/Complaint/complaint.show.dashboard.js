@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import PrintTable from './complaint.print.table.dashboard';
 import {
     getComplaint
-} from './../../Action'
+} from './../../Action';
+import ComplaintChart from './complaint.chart';
 
 class ShowComplaint extends Component {
     constructor(props){
@@ -13,22 +14,29 @@ class ShowComplaint extends Component {
         this.state ={
             searchType: {
                 value:''
-            }
+            },
+            isVisible: false
         }
     }
-    componentWillMount(){
+    componentWillMount = () => {
         const asyncCallForComplaints = this.props.props.props.props;
+        console.log('-------async',asyncCallForComplaints);
         asyncCallForComplaints.dispatch(getComplaint());
-    }
+    };
     onChangeHandler = (e) => {
         const { searchType } = this.state;
         searchType.value = e.target.value;
         this.setState({ searchType });
         console.log(this.state,'-----------Choose value-------');
     };
+    clickHandler = (e) => {
+        e.preventDefault();
+        this.setState({isVisible: !this.state.isVisible});
+    };
     render() {
         const user = this.props.props.props.props.userReducer.users;
         const complaints = this.props.props.props.props.complaintReducer.complaint;
+        console.log(complaints,'----------',this.props.props.props.props.complaintReducer.complaint);
         return(
             <div className="tableComplaint">
                 <div className="panel-heading">
@@ -38,13 +46,22 @@ class ShowComplaint extends Component {
                             <select className="form-control complaint-type-select"
                                     onChange={ this.onChangeHandler }
                                     name="category" >
-                                <option selected="selected" value='Hardware'>Hardware</option>
+                                <option selected="selected" value='All'>All</option>
+                                <option value='Hardware'>Hardware</option>
                                 <option value='Software'>Software</option>
                                 <option value='Infrastructure'>Infrastructure</option>
                                 <option value='Other'>Other</option>
                             </select>
                         </div>
                     </div>
+                    <div className="pull-left">
+                        <button className="btn btn-warning" onClick={ this.clickHandler}>display chart</button>
+                    </div>
+                    {
+                        this.state.isVisible == true?
+                            <ComplaintChart complaints = { complaints }  />
+                            :<div></div>
+                    }
                 </div>
                 <table className="table">
                     <thead>
@@ -61,7 +78,10 @@ class ShowComplaint extends Component {
                         complaints.map((item,index) => {
                             if(this.state.searchType.value==''){
                                 return <PrintTable key={index} data={item} sNo = {index} user={user}/>;
-                            }else{
+                            }else if(this.state.searchType.value=='All'){
+                                return <PrintTable key={index} data={item} sNo = {index} user={user}/>;
+                            }
+                            else{
                                 return this.state.searchType.value == item.category ?
                                     <PrintTable key={index} data={item} sNo = {index} user={user}/>
                                     :<td></td>
