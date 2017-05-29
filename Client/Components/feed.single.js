@@ -53,11 +53,10 @@ class Feeds extends Component {
                 likeDislike.dislike.value='';
                 this.setState({ opinion });
             }
-        })
-
+        });
         this.setState({ opinion });
-
     }
+
     onlikeHandler (e) {
         const { opinion } = this.state;
         if(opinion.dislike >=1 ){
@@ -76,8 +75,6 @@ class Feeds extends Component {
         this.setState({likeDislike});
         this.setState({ opinion });
         this.props.dispatch.dispatch(updateLikeDislike(this.state.opinion));
-
-
     }
     onDislikeHandler (e) {
         const { opinion } = this.state;
@@ -120,8 +117,7 @@ class Feeds extends Component {
             display.type='';
         }
         this.setState({display});
-    }
-
+    };
     render() {
         console.log('--------single feed ------',this.props)
         const item = this.props.data;

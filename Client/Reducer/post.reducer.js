@@ -5,6 +5,7 @@ import {
     POST_CREATE_START,
     POST_CREATED_SUCCESS,
     POST_CREATION_FAIL,
+    POST_CREATE_ADD_SUCCESS,
     UPDATE_LIKE_DISLIKE_START,
     UPDATE_LIKE_DISLIKE_SUCCESS,
     UPDATE_LIKE_DISLIKE_ERROR,
@@ -15,7 +16,7 @@ const intialStatePost = {
     posts:null,
     loading:false,
     err:null
-}
+};
 export const postReducer = (state=intialStatePost,action) => {
     switch (action.type) {
         case POST_CREATE_START: {
@@ -30,6 +31,16 @@ export const postReducer = (state=intialStatePost,action) => {
             return {
                 ...state,
                 posts:posts,
+                loading:false
+            }
+        }
+        case POST_CREATE_ADD_SUCCESS: {
+            console.log('----------post created success------',action.post);
+            let updatedPost = state.posts;
+            updatedPost.unshift(action.post[0]);
+            return {
+                ...state,
+                posts:updatedPost,
                 loading:false
             }
         }
@@ -51,7 +62,7 @@ export const postReducer = (state=intialStatePost,action) => {
                 if(item._id==action.post[0]._id){
                     updatedPost[index] = action.post[0];
                 }
-            })
+            });
             return {
                 posts:updatedPost,
                 loading:false
@@ -64,13 +75,12 @@ export const postReducer = (state=intialStatePost,action) => {
             }
         }
         case POST_COMMENT_SUCCESS: {
-            console.log(action.postUpdated,'-----------sucessfull comment')
             let updatedPost = state.posts;
             updatedPost.forEach((item,index)=> {
                 if(item._id==action.postUpdated[0]._id){
                     updatedPost[index] = action.postUpdated[0];
                 }
-            })
+            });
             return {
                 posts:updatedPost,
                 loading:false
@@ -78,4 +88,4 @@ export const postReducer = (state=intialStatePost,action) => {
         }
     }
     return state;
-}
+};

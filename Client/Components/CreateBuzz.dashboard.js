@@ -33,13 +33,17 @@ class Buzz extends Component {
         this.setState({ isInvalid:false });
         const { data } = this.state;
         data[e.target.name] = e.target.value;
-        console.log('--------------data length --------',data.status.length)
+
         if(data.status.length>=240){
-            console.log('--------------data length inside --------',data.status.length)
              e.target.style.borderColor = 'red';
             this.setState({action:'disabled'});
             if((data.status.length<=240 && data.category)){
                 this.setState({action:''});
+            }
+        }else if(data.status.length<=240 && data.status.length >=5){
+            if(data.category != ''){
+                this.setState({action:''});
+                this.setState({data});
             }
         }
         let reader = new FileReader();
@@ -51,7 +55,7 @@ class Buzz extends Component {
             });
         };
         reader.readAsDataURL(file);
-        this.setState({data});
+
     };
     onClickHandler = (e) =>{
         e.preventDefault();

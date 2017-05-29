@@ -3,24 +3,39 @@
  */
 const postService = require('./posts.service');
 const uploadImage = require('./../../uploader/cdn.image.upload');
+const validate = require('validator');
 
 
 exports.createPost =(req,res,next)=>{
     let url ='';
-    uploadImage.uploadImage(req.body.image, (url) => {
-        let buzzData = {
-            postedBy: req.user._id,
-            imageUrl:url,
-            content: req.body.status,
-            category: req.body.category
+    return new Promise((resolve,reject) => {
+        if(req.body.image != '' || req.body.image == '' ){
+            if(!validate.isEmpty(req.body.status) && !validate.isEmpty(req.body.category)){
+                resolve (req.body,req.user);
+            }else{
+                reject('Empty body');
+            }
+        }else{
+            reject('Empty body');
         }
-        console.log('url is ',url,'------',req.body.status)
-        postService.createPost(buzzData,res);
-    });
-}
+    }).then((body,user) => {
+        uploadImage.uploadImage(req.body.image, (url) => {
+            let buzzData = {
+                postedBy: req.user._id,
+                imageUrl:url,
+                content: req.body.status,
+                category: req.body.category
+            };
+            postService.createPost(buzzData,res);
+        });
+    })
+        .catch((err) => {
+            res.status(500);
+        })
+};
 exports.getPosts = (req,res,next) => {
     postService.getPosts(res);
-}
+};
 exports.updateLikeDislike = (req,res,next) => {
     console.log('in api call ---',req.body);
     const opinion = req.body.opinion;
@@ -30,13 +45,13 @@ exports.updateLikeDislike = (req,res,next) => {
             choose: 'LIKE',
             id: opinion.id,
             user: opinion.user
-        }
+        };
     }else if(opinion.choose=='DISLIKE'){
         opinionPass = {
             choose: 'DISLIKE',
             id: opinion.id,
             user: opinion.user
-        }
+        };
     }
     postService.updateLikeDislike(opinionPass,res);
-}
+};

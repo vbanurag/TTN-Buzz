@@ -19,7 +19,6 @@ class StatusFeed extends Component {
     }
     render () {
         const AllPost = this.props.props.postReducer;
-        console.log(AllPost,'-----------------all post-----------')
         return(
             <div className="post-Container">
                 {AllPost.posts!=null?

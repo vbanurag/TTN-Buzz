@@ -4,18 +4,17 @@
 const Post = require('./posts.model.js');
 
 exports.createPost=(post,res)=>{
-    console.log(post,'----data of post')
     Post.create(post,(err,data)=> {
         if(err){
             res.send(err)
         }else{
-            fetchAllPost(res);
+            this.getUpdatedPost(data._id,res);
         }
     })
-}
+};
 exports.getPosts = (res) => {
    fetchAllPost(res);
-}
+};
 exports.updateLikeDislike = (opinion,res) => {
     if(opinion.choose=='LIKE'){
         Post.find({'dislikeBy.dislikes':{'$in': [opinion.user._id]}}, (err,data) => {
@@ -76,8 +75,7 @@ exports.updateLikeDislike = (opinion,res) => {
         })
     }
 
-}
-
+};
 const updatedPost = (id,res) => {
     console.log('extra method called ----',id)
     Post.find({_id:id}).populate('postedBy')
@@ -112,10 +110,6 @@ const fetchAllPost = (res) => {
                 path: 'commentedBy',
             }
         })
-        /*.populate({
-            path: 'comments.commentedBy',
-            model: 'Comment'
-        })*/
         .exec((err,allPost)=> {
         if(err){
             res.send(err);

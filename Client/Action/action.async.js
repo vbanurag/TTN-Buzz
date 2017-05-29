@@ -5,6 +5,7 @@ import {
     POST_CREATE_INIT,
     POST_CREATED_ONSUCCESS,
     POST_CREATE_ONERROR,
+    POST_NEW_STATUS_SUCCESS,
     UPDATE_LIKEDISLIKE_START,
     UPDATE_LIKEDISLIKE_SUCCESS,
     UPDATE_LIKEDISLIKE_ERROR,
@@ -43,7 +44,6 @@ export function fetchUser() {
     }
 }
 export const createPost = (data) => {
-    console.log(data,'----------dispatch method')
     return(dispatch) => {
         dispatch(POST_CREATE_INIT());
         fetch(postUrl,{
@@ -60,14 +60,14 @@ export const createPost = (data) => {
             })
         })
             .then( response => response.json() )
-            .then( posts => {
-                dispatch( POST_CREATED_ONSUCCESS(posts))
+            .then( post => {
+                dispatch( POST_NEW_STATUS_SUCCESS(post));
             })
             .catch((err) => {
-                dispatch(POST_CREATE_ONERROR(err))
+                dispatch(POST_CREATE_ONERROR(err));
             })
     }
-}
+};
 export const fetchPost = () => {
     return(dispatch) => {
         dispatch(POST_CREATE_INIT());
@@ -76,15 +76,14 @@ export const fetchPost = () => {
         })
             .then(response => response.json())
             .then(posts => {
-                dispatch( POST_CREATED_ONSUCCESS(posts))
+                dispatch( POST_CREATED_ONSUCCESS(posts));
             })
             .catch( (err) => {
-                dispatch(POST_CREATE_ONERROR(err))
+                dispatch(POST_CREATE_ONERROR(err));
             })
     }
-}
+};
 export const updateLikeDislike = ( opinion ) => {
-    console.log('data in api call -----',opinion);
     return(dispatch) => {
         dispatch(UPDATE_LIKEDISLIKE_START());
         fetch(updateLikeDislikePostUrl,{
@@ -98,15 +97,14 @@ export const updateLikeDislike = ( opinion ) => {
         })
             .then( response => response.json())
             .then( post => {
-                dispatch (UPDATE_LIKEDISLIKE_SUCCESS(post) )
+                dispatch (UPDATE_LIKEDISLIKE_SUCCESS(post) );
             })
             .catch((err) => {
-                dispatch(UPDATE_LIKEDISLIKE_ERROR(err))
+                dispatch(UPDATE_LIKEDISLIKE_ERROR(err));
             })
     }
-}
+};
 export const postComment = ( commentData ) => {
-    console.log('postComment,----------',commentData)
     return(dispatch) => {
         dispatch(POST_COMMENT_CREATE_INIT());
         fetch(postCommentUrl,{
@@ -126,7 +124,7 @@ export const postComment = ( commentData ) => {
                 dispatch(POST_COMMENT__CREATE_ONERROR(err));
             })
     }
-}
+};
 
 export const postComplaint = (complain) => {
     return (dispatch) => {
@@ -142,13 +140,13 @@ export const postComplaint = (complain) => {
         })
             .then( response => response.json() )
             .then( complain => {
-                dispatch(POST_COMPLAINT_ONSUCCESS(complain))
+                dispatch(POST_COMPLAINT_ONSUCCESS(complain));
             })
             .catch((err) => {
-                dispatch(POST_COMPLAINT_ONERROR(err))
+                dispatch(POST_COMPLAINT_ONERROR(err));
             })
     }
-}
+};
 export const getComplaint = () => {
     return (dispatch) => {
         dispatch(POST_COMPLAINT_INIT);
@@ -158,13 +156,13 @@ export const getComplaint = () => {
         })
             .then( response => response.json() )
             .then( complain => {
-                dispatch(POST_COMPLAINT_ONSUCCESS(complain))
+                dispatch(POST_COMPLAINT_ONSUCCESS(complain));
             })
             .catch((err) => {
-                dispatch(POST_COMPLAINT_ONERROR(err))
+                dispatch(POST_COMPLAINT_ONERROR(err));
             })
     }
-}
+};
 export const updateComplaintStatus = ( complaint ) => {
     return (dispatch) => {
         dispatch(UPDATE_COMPLAINT_STATUS_INIT);
@@ -185,6 +183,6 @@ export const updateComplaintStatus = ( complaint ) => {
                 dispatch(UPDATE_COMPLAINT_STATUS_ONERROR(err));
             });
     };
-}
+};
 
 
