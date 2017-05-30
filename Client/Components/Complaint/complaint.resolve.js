@@ -93,7 +93,7 @@ class ComplaintResolve extends Component{
                                             </tbody>
                                         </table>
                                         {
-                                            (user.role=='User') ?
+                                            (user.role=='Admin') ?
                                                 <div className="complaint-action">
                                                     <form>
                                                         <div className="form-group complaint-action-form">

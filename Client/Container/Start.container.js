@@ -49,7 +49,7 @@ class StartContainer extends Component {
         return(
                 <div>
                     { //!Array.isArray(this.props.props.userReducer.users)?
-                        this.props.props.userReducer.users.role=='User'?
+                        (this.props.props.userReducer.users.role=='User') ||(this.props.props.userReducer.users.role=='Admin')?
                         <div>
                             <Route exact path='/dashboard'
                                    render={ props => (

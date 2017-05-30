@@ -13,7 +13,7 @@ const PrintTable = (props) => {
             {
                 props.user.role=='User'?
                     <td><Link to={`/dashboard/resolve_complaint/${props.data._id}`} >{props.data._id}</Link></td>
-                    :<td>{props.data._id}</td>
+                    :<td><Link to={`/dashboard/resolve_complaint/${props.data._id}`} >{props.data._id}</Link></td>
             }
             <td >{props.data.category}</td>
             <td className={`td-category-${props.data.status}`}>{props.data.status}</td>
