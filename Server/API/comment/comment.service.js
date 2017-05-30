@@ -6,15 +6,14 @@ const Post = require('./../posts/posts.model');
 const getPost = require('./../posts/posts.service');
 
 exports.addComment = (data,res) => {
-    console.log('in service ....', data)
     Comment.create(data,(err,data)=> {
         if(err){
             res.send(err);
         }else{
             postComments(data,res);
         }
-    })
-}
+    });
+};
 /*exports.getComments = (res) => {
     Comment.find({}).sort({createdAt: -1})
         .populate('commentedBy').populate('commentedOn')
@@ -34,5 +33,5 @@ const postComments = (commentObject,res)=> {
         }else{
             getPost.getUpdatedPost(commentObject.commentedOn,res);
         }
-    })
-}
+    });
+};

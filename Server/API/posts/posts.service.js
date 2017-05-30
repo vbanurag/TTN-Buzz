@@ -6,11 +6,11 @@ const Post = require('./posts.model.js');
 exports.createPost=(post,res)=>{
     Post.create(post,(err,data)=> {
         if(err){
-            res.send(err)
+            res.send(err);
         }else{
             this.getUpdatedPost(data._id,res);
         }
-    })
+    });
 };
 exports.getPosts = (res) => {
    fetchAllPost(res);
@@ -26,7 +26,7 @@ exports.updateLikeDislike = (opinion,res) => {
                         updatedPost(opinion.id,res);
                         //res.send(updateData);
                     }
-                })
+                });
             } else if (data.length >=1){
                 Post.updateOne({_id: opinion.id},{'$pull' : {'dislikeBy.dislikes': opinion.user._id}},(err,data) => {
                     if(err){
@@ -39,9 +39,9 @@ exports.updateLikeDislike = (opinion,res) => {
                                 updatedPost(opinion.id,res);
                                 //res.send(updateData);
                             }
-                        })
+                        });
                     }
-                })
+                });
             }
         })
     }else if(opinion.choose == 'DISLIKE'){
@@ -55,7 +55,7 @@ exports.updateLikeDislike = (opinion,res) => {
                         updatedPost(opinion.id,res);
                         //res.send(updateData);
                     }
-                })
+                });
             } else if (data.length >= 1){
                 Post.update({_id: opinion.id},{'$pull' : {'likeBy.likes': opinion.user._id}},(err,data) => {
                     if(err){
@@ -68,16 +68,15 @@ exports.updateLikeDislike = (opinion,res) => {
                                 updatedPost(opinion.id,res);
                                 //res.send(updateData);
                             }
-                        })
+                        });
                     }
-                })
+                });
             }
-        })
+        });
     }
 
 };
 const updatedPost = (id,res) => {
-    console.log('extra method called ----',id)
     Post.find({_id:id}).populate('postedBy')
         .populate('likeBy.likes')
         .populate('dislikeBy.dislikes')
@@ -94,8 +93,8 @@ const updatedPost = (id,res) => {
                 console.log('-------post-----',post);
                 res.send(post);
             }
-        })
-}
+        });
+};
 exports.getUpdatedPost = updatedPost;
 
 const fetchAllPost = (res) => {
@@ -116,5 +115,5 @@ const fetchAllPost = (res) => {
         }else{
             res.send(allPost);
         }
-    })
-}
+    });
+};

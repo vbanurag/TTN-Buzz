@@ -5,7 +5,8 @@ const Mongoose = require('mongoose');
 
 const CommentSchema = new Mongoose.Schema({
     comment:{
-        type:String
+        type:String,
+        index: true
     },
     commentedBy:{
         type:Mongoose.Schema.Types.ObjectId,

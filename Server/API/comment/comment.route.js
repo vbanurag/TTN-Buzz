@@ -8,9 +8,9 @@ module.exports = (app) => {
     app.put('/api/comment',
         checkLoginMiddleware.isLoggedIn,
         commentController.addComment
-    )
+    );
     app.get('/api/comment/:id',
         checkLoginMiddleware.isLoggedIn,
         commentController.getComments
-    )
-}
+    );
+};

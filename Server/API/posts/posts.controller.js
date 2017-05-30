@@ -4,6 +4,7 @@
 const postService = require('./posts.service');
 const uploadImage = require('./../../uploader/cdn.image.upload');
 const validate = require('validator');
+const postValidate = require('./post.validate');
 
 
 exports.createPost =(req,res,next)=>{
@@ -37,21 +38,25 @@ exports.getPosts = (req,res,next) => {
     postService.getPosts(res);
 };
 exports.updateLikeDislike = (req,res,next) => {
-    console.log('in api call ---',req.body);
-    const opinion = req.body.opinion;
-    let opinionPass= {};
-    if(opinion.choose=='LIKE'){
-        opinionPass = {
-            choose: 'LIKE',
-            id: opinion.id,
-            user: opinion.user
-        };
-    }else if(opinion.choose=='DISLIKE'){
-        opinionPass = {
-            choose: 'DISLIKE',
-            id: opinion.id,
-            user: opinion.user
-        };
+    if(postValidate.updateLikeDislikeValidate(req)){
+        const opinion = req.body.opinion;
+        let opinionPass= {};
+        if(opinion.choose=='LIKE'){
+            opinionPass = {
+                choose: 'LIKE',
+                id: opinion.id,
+                user: opinion.user
+            };
+        }else if(opinion.choose=='DISLIKE'){
+            opinionPass = {
+                choose: 'DISLIKE',
+                id: opinion.id,
+                user: opinion.user
+            };
+        }
+        postService.updateLikeDislike(opinionPass,res);
+    }else{
+        res.send({'msg' : 'Invalid data'});
     }
-    postService.updateLikeDislike(opinionPass,res);
+
 };

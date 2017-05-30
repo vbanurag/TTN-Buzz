@@ -104,8 +104,10 @@ class Feeds extends Component {
     onClickCommentHandler(e){
         e.preventDefault();
         console.log('comment on post , ', this.state.commentPost);
-        this.props.dispatch.dispatch(postComment(this.state.commentPost));
-        this.setState({commentPost: {comment:'', postId:''}});
+        if(this.state.commentPost.comment<=1000){
+            this.props.dispatch.dispatch(postComment(this.state.commentPost));
+            this.setState({commentPost: {comment:'', postId:''}});
+        }
     }
     onClickCommentDisplayToggle = () => {
         const { display } = this.state;
@@ -119,7 +121,6 @@ class Feeds extends Component {
         this.setState({display});
     };
     render() {
-        console.log('--------single feed ------',this.props)
         const item = this.props.data;
         const user = Object.assign({},item.postedBy);
         const date = new Date(item.createdAt);
