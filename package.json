@@ -5,7 +5,7 @@
   "author": "Anurag Sharma",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --progress --colors",
+    "start": " npm run dev-start",
     "dev-server": "nodemon ./Server/Express/express.server.js",
     "dev-client": "webpack-dev-server --port 9000",
     "dev-start": "concurrently \"npm run dev-server\" \"npm run dev-client\""
@@ -44,6 +44,7 @@
     "mongoose-text-search": "^0.0.2",
     "morgan": "^1.8.1",
     "nodemailer": "^4.0.1",
+    "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
     "react": "^15.5.4",
