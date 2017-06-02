@@ -27,5 +27,5 @@ app.listen((process.env.PORT || 4500 ),()=>{
     console.log('server is running at anuragsharma.com:4500')
 });
 app.get('/*',(req,res) => {
-    res.redirect('http://localhost:9000/')
+    res.redirect('http://anuragsharma.com:9000/')
 });

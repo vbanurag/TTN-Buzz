@@ -14,7 +14,7 @@ const complaintRoute = require('./../API/Complaints/complaints.route');
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Origin" , 'http://localhost:9000');
+        res.header("Access-Control-Allow-Origin" , 'http://anuragsharma.com:9000')
         res.header("Access-Control-Allow-Credentials" , true );
         next();
     };
@@ -33,8 +33,8 @@ module.exports= (app)=>{
     );
     app.get('/auth/google',
         passport.authenticate('google', {
-            successRedirect : 'http:/localhost:9000/dashboard',
-            failureRedirect : 'http://localhost:9000/'
+            successRedirect : 'http://anuragsharma.com:9000/dashboard',
+            failureRedirect : 'http://anuragsharma.com:9000/'
         }));
   /* app.get('/auth/google',
        passport.authenticate('google', { failureRedirect: "/" }), function (req, res) {
@@ -59,10 +59,10 @@ module.exports= (app)=>{
         if(req.isAuthenticated()){
             req.session.destroy(function(e){
                 req.logout();
-                res.redirect('http://localhost:9000/');
+                res.redirect('http://anuragsharma.com:9000/');
             });
         }else{
-            res.redirect('http://localhost:9000/');
+            res.redirect('http://anuragsharma.com:9000/');
         }
        /* req.session.destroy(function() {
             res.clearCookie('userId');
