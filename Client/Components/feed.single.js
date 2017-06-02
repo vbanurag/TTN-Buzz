@@ -39,7 +39,8 @@ class Feeds extends Component {
                 dislike: {
                     value:'none'
                 }
-            }
+            },
+            action: 'disabled'
         }
     }
     componentWillMount() {
@@ -98,15 +99,20 @@ class Feeds extends Component {
     onCommentChangeHandler(e){
         const { commentPost } = this.state;
         commentPost[e.target.name] = e.target.value;
+        if(commentPost.comment!=''){
+            this.setState({action: ''});
+        }else{
+            this.setState({action: 'disabled'});
+        }
         commentPost.postId = this.props.data._id;
         this.setState({ commentPost });
     }
     onClickCommentHandler(e){
         e.preventDefault();
         console.log('comment on post , ', this.state.commentPost);
-        if(this.state.commentPost.comment<=1000){
+        if(this.state.commentPost.comment.length<=1000){
             this.props.dispatch.dispatch(postComment(this.state.commentPost));
-            this.setState({commentPost: {comment:'', postId:''}});
+            this.setState({commentPost: {comment:'', postId:''},action:'disabled'});
         }
     }
     onClickCommentDisplayToggle = () => {
@@ -197,7 +203,7 @@ class Feeds extends Component {
                                     onChange={this.onCommentChangeHandler.bind(this)}
                                 />
                                     <button
-                                        className="btn btn-success green comment-btn"
+                                        className={`btn btn-success green comment-btn ${this.state.action}`}
                                         onClick={this.onClickCommentHandler.bind(this)}>
                                         <i className="fa fa-comments-o"></i>
                                     </button>

@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 module.exports = {
 
-    entry: './Client/index.js',
+    entry: path.join(__dirname,'Client/index.js'),
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
@@ -19,7 +19,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './Client/index.html',
+            template: path.join(__dirname,'Client/index.html'),
             filename: 'index.html',
             multiStep: true
         }),
@@ -33,7 +33,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         host: 'anuragsharma.com',
-        port: 9000,
+        port: (process.env.PORT || 9000),
         stats: 'errors-only',
         historyApiFallback: true,
         hot: true,
@@ -50,4 +50,4 @@ module.exports = {
     //         }
     //     }
     // }
-}
+};

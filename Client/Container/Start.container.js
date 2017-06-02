@@ -31,6 +31,7 @@ class StartContainer extends Component {
         }
     }
     componentWillMount(){
+        console.log('start page ---- ',this.props)
         this.props.props.dispatch(fetchUser());
 
     }

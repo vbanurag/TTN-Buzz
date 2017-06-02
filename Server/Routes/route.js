@@ -14,7 +14,7 @@ const complaintRoute = require('./../API/Complaints/complaints.route');
 module.exports= (app)=>{
     const allowCrossDomain = function(req, res, next) {
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header("Access-Control-Allow-Origin" , 'http://anuragsharma.com:9000')
+        res.header("Access-Control-Allow-Origin" , 'http://anuragsharma.com:9000');
         res.header("Access-Control-Allow-Credentials" , true );
         next();
     };
@@ -70,5 +70,4 @@ module.exports= (app)=>{
         });*/
     })
 
-
-}
+};
