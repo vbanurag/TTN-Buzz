@@ -32,8 +32,8 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        host: 'anuragsharma.com',
-        port: (process.env.PORT || 9000),
+        host: 'localhost',
+        port: 9000,
         stats: 'errors-only',
         historyApiFallback: true,
         hot: true,
